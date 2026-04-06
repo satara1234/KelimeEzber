@@ -45,25 +45,10 @@
             }
         }
 
-        @keyframes shimmer {
-            0% {
-                background-position: -1000px 0;
-            }
-            100% {
-                background-position: 1000px 0;
-            }
-        }
-
         @keyframes fireAnimation {
             0% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.2); opacity: 0.8; }
             100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes streakPulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
 
         .animate-slide-up {
@@ -80,10 +65,6 @@
 
         .animate-fire {
             animation: fireAnimation 0.5s ease-in-out;
-        }
-
-        .streak-pulse {
-            animation: streakPulse 1s ease-in-out infinite;
         }
 
         ::-webkit-scrollbar {
@@ -114,11 +95,6 @@
 
         .calendar-day:active {
             transform: scale(0.95);
-        }
-
-        .image-preview {
-            max-height: 150px;
-            object-fit: cover;
         }
 
         .speak-btn {
@@ -177,6 +153,61 @@
         .dark-theme .bg-gray-100 {
             background-color: #2d2d44 !important;
         }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: #3B82F6;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* Search bar animation */
+        .search-input {
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            transform: scale(1.02);
+        }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -194,7 +225,31 @@
             6: { interval: 0, requiredStreak: 0, nextLevel: 6, fallbackLevel: 5, name: 'Ezberlendi', color: '#8B5CF6', bg: 'bg-purple-500', light: 'bg-purple-100' }
         };
 
-        // Initial demo words with extended properties
+        // Available card field types
+        const CARD_FIELD_TYPES = [
+            { id: 'showSynonyms', label: 'Eş Anlamlılar', icon: '📖', default: true },
+            { id: 'showAntonyms', label: 'Zıt Anlamlılar', icon: '⚡', default: true },
+            { id: 'showExampleSentence', label: 'Örnek Cümle', icon: '💬', default: true },
+            { id: 'showImage', label: 'Görsel', icon: '🖼️', default: true },
+            { id: 'showLevelBadge', label: 'Seviye Rozeti', icon: '🏷️', default: true },
+            { id: 'showKademe', label: 'Kademe', icon: '📊', default: true },
+            { id: 'showNextReview', label: 'Sonraki Tekrar', icon: '📅', default: true },
+            { id: 'showSpeakButtons', label: 'Seslendirme Butonları', icon: '🔊', default: true }
+        ];
+
+        // Default card field visibility settings
+        const DEFAULT_CARD_FIELDS = {
+            showSynonyms: true,
+            showAntonyms: true,
+            showExampleSentence: true,
+            showImage: true,
+            showLevelBadge: true,
+            showKademe: true,
+            showNextReview: true,
+            showSpeakButtons: true
+        };
+
+        // Initial demo words
         const INITIAL_WORDS = [
             { 
                 id: '1', term: 'Apple', definition: 'Elma', level: 1, kademe: 0, nextReview: Date.now(), finishTime: null,
@@ -215,6 +270,14 @@
             { 
                 id: '5', term: 'Computer', definition: 'Bilgisayar', level: 2, kademe: 0, nextReview: Date.now(), finishTime: null,
                 image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300', synonyms: 'PC, Laptop', antonyms: '', exampleSentence: 'I work on my computer.'
+            },
+            { 
+                id: '6', term: 'Happy', definition: 'Mutlu', level: 1, kademe: 3, nextReview: Date.now(), finishTime: null,
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300', synonyms: 'Joyful, Glad', antonyms: 'Sad', exampleSentence: 'She is very happy today.'
+            },
+            { 
+                id: '7', term: 'Big', definition: 'Büyük', level: 2, kademe: 1, nextReview: Date.now(), finishTime: null,
+                image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300', synonyms: 'Large, Huge', antonyms: 'Small', exampleSentence: 'This is a big house.'
             }
         ];
 
@@ -228,12 +291,13 @@
             quizWords: [],
             quizIndex: 0,
             feedback: null,
-            theme: 'light', // light or dark
+            theme: 'light',
             quizStartHour: 0,
             quizEndHour: 23,
             showAddForm: false,
             showEditModal: false,
             showDetailModal: false,
+            showCardSettings: false,
             detailWord: null,
             editingWord: null,
             newWord: {
@@ -248,7 +312,9 @@
             quizHistory: [],
             writingAnswer: '',
             streakDays: 0,
-            totalPoints: 0
+            totalPoints: 0,
+            cardFields: { ...DEFAULT_CARD_FIELDS },
+            searchQuery: ''
         };
 
         // Helper Functions
@@ -260,6 +326,7 @@
             localStorage.setItem('quiz_history', JSON.stringify(state.quizHistory));
             localStorage.setItem('streak_days', state.streakDays);
             localStorage.setItem('total_points', state.totalPoints);
+            localStorage.setItem('card_fields', JSON.stringify(state.cardFields));
         };
 
         const loadFromLocalStorage = () => {
@@ -272,6 +339,8 @@
             state.quizHistory = savedHistory ? JSON.parse(savedHistory) : [];
             state.streakDays = parseInt(localStorage.getItem('streak_days')) || 0;
             state.totalPoints = parseInt(localStorage.getItem('total_points')) || 0;
+            const savedCardFields = localStorage.getItem('card_fields');
+            state.cardFields = savedCardFields ? JSON.parse(savedCardFields) : { ...DEFAULT_CARD_FIELDS };
             updateStreakAndPoints();
         };
 
@@ -281,18 +350,14 @@
             const yesterday = new Date();
             yesterday.setDate(yesterday.getDate() - 1);
             
-            // Update streak
             if (lastQuizDate) {
                 const lastDateStr = lastQuizDate.toDateString();
                 const todayStr = new Date().toDateString();
                 
                 if (lastDateStr === todayStr) {
-                    // Already updated today, don't change streak
                 } else if (lastDateStr === yesterday.toDateString()) {
-                    // Consecutive day
                     state.streakDays++;
                 } else {
-                    // Streak broken
                     state.streakDays = 1;
                 }
             }
@@ -305,7 +370,6 @@
             saveToLocalStorage();
             render();
             
-            // Show point animation
             const pointElement = document.getElementById('points-display');
             if (pointElement) {
                 pointElement.classList.add('animate-fire');
@@ -331,12 +395,10 @@
                 const newKademe = word.kademe + 1;
                 const config = LEVEL_CONFIG[word.level];
                 
-                // Add points for correct answer
                 addPoints(10);
                 
                 if (newKademe >= config.requiredStreak) {
                     const nextLevel = config.nextLevel;
-                    // Bonus points for leveling up
                     addPoints(50);
                     if (nextLevel === 6) {
                         return {
@@ -362,11 +424,21 @@
                     };
                 }
             } else {
-                return {
-                    ...word,
-                    kademe: 0,
-                    nextReview: Date.now() + (LEVEL_CONFIG[word.level].interval * 60 * 60 * 1000)
-                };
+                if (word.level === 1) {
+                    return {
+                        ...word,
+                        kademe: 0,
+                        nextReview: Date.now() + (LEVEL_CONFIG[1].interval * 60 * 60 * 1000)
+                    };
+                } else {
+                    const fallbackLevel = LEVEL_CONFIG[word.level].fallbackLevel;
+                    return {
+                        ...word,
+                        level: fallbackLevel,
+                        kademe: 0,
+                        nextReview: Date.now() + (LEVEL_CONFIG[fallbackLevel].interval * 60 * 60 * 1000)
+                    };
+                }
             }
         };
 
@@ -504,7 +576,7 @@
                 if (!state.quizHistory.includes(today)) {
                     state.quizHistory.push(today);
                     updateStreakAndPoints();
-                    addPoints(100); // Bonus points for completing full quiz
+                    addPoints(100);
                     saveToLocalStorage();
                 }
             }
@@ -619,6 +691,18 @@
             render();
         };
 
+        const toggleCardField = (fieldId) => {
+            state.cardFields[fieldId] = !state.cardFields[fieldId];
+            saveToLocalStorage();
+            render();
+        };
+
+        const resetCardFields = () => {
+            state.cardFields = { ...DEFAULT_CARD_FIELDS };
+            saveToLocalStorage();
+            render();
+        };
+
         const exportData = () => {
             const dataStr = JSON.stringify(state.words, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
@@ -653,19 +737,30 @@
             }
         };
 
-        const getSortedWords = () => {
-            const wordsToSort = [...state.words];
+        const getFilteredAndSortedWords = () => {
+            let filtered = [...state.words];
+            
+            // Apply search filter
+            if (state.searchQuery.trim()) {
+                const query = state.searchQuery.toLowerCase().trim();
+                filtered = filtered.filter(word => 
+                    word.term.toLowerCase().includes(query) || 
+                    word.definition.toLowerCase().includes(query)
+                );
+            }
+            
+            // Apply sort
             switch(state.sortType) {
                 case 'newest':
-                    return wordsToSort.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+                    return filtered.sort((a, b) => parseInt(b.id) - parseInt(a.id));
                 case 'oldest':
-                    return wordsToSort.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+                    return filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
                 case 'levelAsc':
-                    return wordsToSort.sort((a, b) => a.level - b.level);
+                    return filtered.sort((a, b) => a.level - b.level);
                 case 'levelDesc':
-                    return wordsToSort.sort((a, b) => b.level - a.level);
+                    return filtered.sort((a, b) => b.level - a.level);
                 default:
-                    return wordsToSort;
+                    return filtered;
             }
         };
 
@@ -703,6 +798,112 @@
             if (state.streakDays >= 7) return '🔥';
             if (state.streakDays >= 3) return '📈';
             return '🌱';
+        };
+
+        const renderCardFieldsSettings = () => {
+            return `
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5 mb-5">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="text-2xl">🎨</span>
+                            <h3 class="font-bold text-gray-800">Kart Düzeni Özelleştirme</h3>
+                        </div>
+                        <button onclick="window.resetCardFields()" 
+                            class="text-sm text-blue-500 px-3 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 transition-all">
+                            Varsayılana Dön
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-4">Kelime kartlarında hangi bilgilerin görüneceğini seçin</p>
+                    <div class="grid grid-cols-2 gap-3">
+                        ${CARD_FIELD_TYPES.map(field => `
+                            <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-all">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-lg">${field.icon}</span>
+                                    <span class="text-sm font-medium text-gray-700">${field.label}</span>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="${field.id}" ${state.cardFields[field.id] ? 'checked' : ''} onchange="window.toggleCardField('${field.id}')">
+                                    <span class="toggle-slider"></span>
+                                </div>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderWordCard = (word, isMastered = false) => {
+            const config = LEVEL_CONFIG[word.level];
+            
+            return `
+                <div class="word-card bg-white/90 backdrop-blur-sm rounded-2xl shadow-md overflow-hidden transition-all active:scale-98" 
+                    onclick="window.openDetailModal(${JSON.stringify(word).replace(/"/g, '&quot;')})">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <div class="font-bold text-lg text-gray-800">${word.term}</div>
+                                    ${state.cardFields.showLevelBadge ? `
+                                        <span class="px-2 py-0.5 rounded-full text-xs text-white ${getLevelColor(word.level)}">Lv${word.level}</span>
+                                    ` : ''}
+                                    ${isMastered ? '<span class="px-2 py-0.5 rounded-full text-xs text-white bg-purple-500">✓ Ezberlendi</span>' : ''}
+                                    ${state.cardFields.showSpeakButtons ? `
+                                        <div class="flex gap-1">
+                                            <button onclick="event.stopPropagation(); window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" 
+                                                class="speak-btn w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm transition-all">
+                                                🔊
+                                            </button>
+                                            <button onclick="event.stopPropagation(); window.speakText('${word.definition.replace(/'/g, "\\'")}', 'tr')" 
+                                                class="speak-btn w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm transition-all">
+                                                🎤
+                                            </button>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                                <div class="text-gray-600 text-sm mt-1">${word.definition}</div>
+                                
+                                ${state.cardFields.showSynonyms && word.synonyms ? `
+                                    <div class="text-xs text-green-600 mt-2">📖 Eş: ${word.synonyms}</div>
+                                ` : ''}
+                                
+                                ${state.cardFields.showAntonyms && word.antonyms ? `
+                                    <div class="text-xs text-red-600">⚡ Zıt: ${word.antonyms}</div>
+                                ` : ''}
+                                
+                                ${state.cardFields.showExampleSentence && word.exampleSentence ? `
+                                    <div class="text-xs text-blue-600 italic mt-2 line-clamp-1">💬 "${word.exampleSentence.substring(0, 60)}${word.exampleSentence.length > 60 ? '...' : ''}"</div>
+                                ` : ''}
+                                
+                                <div class="flex items-center gap-3 mt-2">
+                                    ${state.cardFields.showKademe ? `
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-xs text-gray-400">Kademe:</span>
+                                            <span class="text-xs font-medium">${word.kademe}/${LEVEL_CONFIG[word.level].requiredStreak}</span>
+                                        </div>
+                                    ` : ''}
+                                    ${state.cardFields.showKademe && state.cardFields.showNextReview ? `<div class="w-1 h-1 bg-gray-300 rounded-full"></div>` : ''}
+                                    ${state.cardFields.showNextReview ? `
+                                        <div class="text-xs text-gray-400">📅 ${getNextReviewDate(word.nextReview)}</div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                            <div class="flex gap-1">
+                                <button onclick="event.stopPropagation(); window.openEditModal(${JSON.stringify(word).replace(/"/g, '&quot;')})" 
+                                    class="w-8 h-8 rounded-full bg-gray-100 text-blue-500 flex items-center justify-center text-sm transition-all hover:bg-gray-200">
+                                    ✏️
+                                </button>
+                                <button onclick="event.stopPropagation(); window.deleteWord('${word.id}')" 
+                                    class="w-8 h-8 rounded-full bg-gray-100 text-red-500 flex items-center justify-center text-sm transition-all hover:bg-gray-200">
+                                    🗑️
+                                </button>
+                            </div>
+                        </div>
+                        ${state.cardFields.showImage && word.image ? `
+                            <img src="${word.image}" alt="${word.term}" class="mt-3 rounded-xl w-full h-32 object-cover" onerror="this.style.display='none'">
+                        ` : ''}
+                    </div>
+                </div>
+            `;
         };
 
         const renderCalendar = () => {
@@ -796,9 +997,7 @@
                                         <span class="font-semibold text-${config.color.split('-')[1]}-600">${levelStats[level]}</span>
                                     </div>
                                     <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                                        <div class="${config.bg} h-3 rounded-full transition-all duration-700 ease-out relative" style="width: ${percent}%">
-                                            <div class="absolute inset-0 bg-white/20 rounded-full shimmer"></div>
-                                        </div>
+                                        <div class="${config.bg} h-3 rounded-full transition-all duration-700 ease-out" style="width: ${percent}%"></div>
                                     </div>
                                 </div>
                             `;
@@ -818,172 +1017,6 @@
                                 </div>
                             </div>
                         ` : ''}
-                    </div>
-                </div>
-            `;
-        };
-
-        const renderEditModal = () => {
-            if (!state.showEditModal || !state.editingWord) return '';
-            
-            return `
-                <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeEditModal(event)">
-                    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-screen overflow-y-auto animate-scale-in" onclick="event.stopPropagation()">
-                        <div class="sticky top-0 bg-white border-b border-gray-100 p-5 rounded-t-2xl">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-2xl">✏️</span>
-                                    <h3 class="font-bold text-xl">Kelime Düzenle</h3>
-                                </div>
-                                <button onclick="window.closeEditModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
-                            </div>
-                        </div>
-                        <div class="p-5 space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Kelime</label>
-                                <input type="text" id="editTerm" placeholder="Kelime" value="${(state.editingWord.term || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Anlamı</label>
-                                <input type="text" id="editDefinition" placeholder="Anlamı" value="${(state.editingWord.definition || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Görsel URL</label>
-                                <input type="text" id="editImage" placeholder="https://..." value="${(state.editingWord.image || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Eş Anlamlılar</label>
-                                <textarea id="editSynonyms" placeholder="Eş anlamlılar" rows="2"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">${state.editingWord.synonyms || ''}</textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Zıt Anlamlılar</label>
-                                <input type="text" id="editAntonyms" placeholder="Zıt anlamlılar" value="${(state.editingWord.antonyms || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Örnek Cümle</label>
-                                <textarea id="editExample" placeholder="Örnek cümle" rows="2"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">${state.editingWord.exampleSentence || ''}</textarea>
-                            </div>
-                        </div>
-                        <div class="sticky bottom-0 bg-white border-t border-gray-100 p-5 rounded-b-2xl flex gap-3">
-                            <button onclick="window.saveEdit()"
-                                class="flex-1 bg-gradient-to-r from-green-500 to-blue-600 text-white py-3 rounded-xl font-semibold transition-all hover:shadow-lg active:scale-95">
-                                💾 Kaydet
-                            </button>
-                            <button onclick="window.closeEditModal()"
-                                class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold transition-all hover:bg-gray-200 active:scale-95">
-                                İptal
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
-
-        const renderDetailModal = () => {
-            if (!state.showDetailModal || !state.detailWord) return '';
-            
-            const word = state.detailWord;
-            const config = LEVEL_CONFIG[word.level];
-            
-            return `
-                <div class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeDetailModal(event)">
-                    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto animate-scale-in" onclick="event.stopPropagation()">
-                        <div class="sticky top-0 bg-white rounded-t-3xl p-5 border-b border-gray-100">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-3xl">${getLevelIcon(word.level)}</span>
-                                        <span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${config.bg}">Seviye ${word.level} • ${config.name}</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <h2 class="text-3xl font-bold text-gray-800">${word.term}</h2>
-                                        <button onclick="window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" 
-                                            class="speak-btn w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl transition-all hover:bg-blue-200 active:scale-90">
-                                            🔊
-                                        </button>
-                                    </div>
-                                </div>
-                                <button onclick="window.closeDetailModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
-                            </div>
-                        </div>
-                        
-                        <div class="p-5 space-y-5">
-                            ${word.image ? `
-                                <div class="rounded-2xl overflow-hidden bg-gray-100">
-                                    <img src="${word.image}" alt="${word.term}" class="w-full h-64 object-cover">
-                                </div>
-                            ` : `
-                                <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 p-8 text-center">
-                                    <span class="text-6xl">📖</span>
-                                    <p class="text-gray-500 mt-2">Görsel eklenmemiş</p>
-                                </div>
-                            `}
-                            
-                            <div class="bg-gray-50 rounded-2xl p-5">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-xl">📝</span>
-                                    <h3 class="font-semibold text-gray-700">Anlamı</h3>
-                                </div>
-                                <p class="text-gray-800 text-lg">${word.definition}</p>
-                            </div>
-                            
-                            ${word.synonyms ? `
-                                <div class="bg-green-50 rounded-2xl p-5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-xl">📖</span>
-                                        <h3 class="font-semibold text-green-700">Eş Anlamlılar</h3>
-                                    </div>
-                                    <p class="text-green-800">${word.synonyms}</p>
-                                </div>
-                            ` : ''}
-                            
-                            ${word.antonyms ? `
-                                <div class="bg-red-50 rounded-2xl p-5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-xl">⚡</span>
-                                        <h3 class="font-semibold text-red-700">Zıt Anlamlılar</h3>
-                                    </div>
-                                    <p class="text-red-800">${word.antonyms}</p>
-                                </div>
-                            ` : ''}
-                            
-                            ${word.exampleSentence ? `
-                                <div class="bg-blue-50 rounded-2xl p-5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-xl">💬</span>
-                                        <h3 class="font-semibold text-blue-700">Örnek Cümle</h3>
-                                    </div>
-                                    <p class="text-blue-800 italic">"${word.exampleSentence}"</p>
-                                    <button onclick="window.speakText('${word.exampleSentence.replace(/'/g, "\\'")}', 'en')" 
-                                        class="mt-3 text-sm text-blue-600 flex items-center gap-1 hover:underline">
-                                        🔊 Cümleyi dinle
-                                    </button>
-                                </div>
-                            ` : ''}
-                            
-                            <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                                <div class="text-sm text-gray-500">
-                                    <div>Kademe: ${word.kademe}/${config.requiredStreak}</div>
-                                    <div>Sonraki tekrar: ${getNextReviewDate(word.nextReview)}</div>
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="window.openEditModalFromDetail()" 
-                                        class="px-4 py-2 bg-blue-500 text-white rounded-xl text-sm font-semibold transition-all hover:bg-blue-600 active:scale-95">
-                                        ✏️ Düzenle
-                                    </button>
-                                    <button onclick="window.deleteWordFromDetail()" 
-                                        class="px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-semibold transition-all hover:bg-red-600 active:scale-95">
-                                        🗑️ Sil
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             `;
@@ -1154,9 +1187,10 @@
         };
 
         const renderListTab = () => {
-            const sortedWords = getSortedWords();
-            const activeWords = sortedWords.filter(w => w.level !== 6);
-            const masteredWords = sortedWords.filter(w => w.level === 6);
+            const filteredWords = getFilteredAndSortedWords();
+            const activeWords = filteredWords.filter(w => w.level !== 6);
+            const masteredWords = filteredWords.filter(w => w.level === 6);
+            const totalFiltered = filteredWords.length;
             
             const sortOptions = [
                 { value: 'newest', label: 'Yeniden Eskiye', icon: '🆕' },
@@ -1167,73 +1201,54 @@
             
             return `
                 <div class="p-4 pb-24 animate-slide-up">
-                    <div class="flex justify-between items-center mb-5">
-                        <div>
-                            <h2 class="font-bold text-2xl text-gray-800">📋 Kelime Listem</h2>
-                            <p class="text-sm text-gray-500 mt-1">${activeWords.length} aktif, ${masteredWords.length} ezberlendi</p>
-                        </div>
-                        <div class="relative">
-                            <select id="sortSelect" onchange="window.changeSortType(this.value)" 
-                                class="appearance-none bg-white/90 backdrop-blur-sm border-0 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md">
-                                ${sortOptions.map(opt => `
-                                    <option value="${opt.value}" ${state.sortType === opt.value ? 'selected' : ''}>
-                                        ${opt.icon} ${opt.label}
-                                    </option>
-                                `).join('')}
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                                ▼
+                    <div class="flex flex-col gap-4 mb-5">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h2 class="font-bold text-2xl text-gray-800">📋 Kelime Listem</h2>
+                                <p class="text-sm text-gray-500 mt-1">${state.words.filter(w => w.level !== 6).length} aktif, ${state.words.filter(w => w.level === 6).length} ezberlendi</p>
+                            </div>
+                            <div class="relative">
+                                <select id="sortSelect" onchange="window.changeSortType(this.value)" 
+                                    class="appearance-none bg-white/90 backdrop-blur-sm border-0 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md">
+                                    ${sortOptions.map(opt => `
+                                        <option value="${opt.value}" ${state.sortType === opt.value ? 'selected' : ''}>
+                                            ${opt.icon} ${opt.label}
+                                        </option>
+                                    `).join('')}
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+                                    ▼
+                                </div>
                             </div>
                         </div>
+                        
+                        <!-- Search Bar -->
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <span class="text-gray-400 text-lg">🔍</span>
+                            </div>
+                            <input type="text" id="searchInput" placeholder="Kelime veya anlam ara..." 
+                                value="${state.searchQuery.replace(/"/g, '&quot;')}"
+                                onkeyup="window.searchWords(this.value)"
+                                class="search-input w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border-0 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700">
+                            ${state.searchQuery ? `
+                                <button onclick="window.clearSearch()" 
+                                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600">
+                                    ✕
+                                </button>
+                            ` : ''}
+                        </div>
+                        
+                        <!-- Search Results Info -->
+                        ${state.searchQuery ? `
+                            <div class="text-sm text-gray-500 bg-white/50 rounded-xl px-3 py-2">
+                                "${state.searchQuery}" için ${totalFiltered} sonuç bulundu
+                            </div>
+                        ` : ''}
                     </div>
                     
                     <div class="space-y-3">
-                        ${activeWords.map(word => `
-                            <div class="word-card bg-white/90 backdrop-blur-sm rounded-2xl shadow-md overflow-hidden transition-all active:scale-98" 
-                                onclick="window.openDetailModal(${JSON.stringify(word).replace(/"/g, '&quot;')})">
-                                <div class="p-4">
-                                    <div class="flex justify-between items-start">
-                                        <div class="flex-1">
-                                            <div class="flex items-center gap-2 flex-wrap">
-                                                <div class="font-bold text-lg text-gray-800">${word.term}</div>
-                                                <span class="px-2 py-0.5 rounded-full text-xs text-white ${getLevelColor(word.level)}">Lv${word.level}</span>
-                                                <div class="flex gap-1">
-                                                    <button onclick="event.stopPropagation(); window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" 
-                                                        class="speak-btn w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm transition-all">
-                                                        🔊
-                                                    </button>
-                                                    <button onclick="event.stopPropagation(); window.speakText('${word.definition.replace(/'/g, "\\'")}', 'tr')" 
-                                                        class="speak-btn w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm transition-all">
-                                                        🎤
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="text-gray-600 text-sm mt-1">${word.definition}</div>
-                                            ${word.exampleSentence ? `<div class="text-xs text-blue-600 italic mt-2 line-clamp-1">💬 "${word.exampleSentence.substring(0, 50)}${word.exampleSentence.length > 50 ? '...' : ''}"</div>` : ''}
-                                            <div class="flex items-center gap-3 mt-2">
-                                                <div class="flex items-center gap-1">
-                                                    <span class="text-xs text-gray-400">Kademe:</span>
-                                                    <span class="text-xs font-medium">${word.kademe}/${LEVEL_CONFIG[word.level].requiredStreak}</span>
-                                                </div>
-                                                <div class="w-1 h-1 bg-gray-300 rounded-full"></div>
-                                                <div class="text-xs text-gray-400">📅 ${getNextReviewDate(word.nextReview)}</div>
-                                            </div>
-                                        </div>
-                                        <div class="flex gap-1">
-                                            <button onclick="event.stopPropagation(); window.openEditModal(${JSON.stringify(word).replace(/"/g, '&quot;')})" 
-                                                class="w-8 h-8 rounded-full bg-gray-100 text-blue-500 flex items-center justify-center text-sm transition-all hover:bg-gray-200">
-                                                ✏️
-                                            </button>
-                                            <button onclick="event.stopPropagation(); window.deleteWord('${word.id}')" 
-                                                class="w-8 h-8 rounded-full bg-gray-100 text-red-500 flex items-center justify-center text-sm transition-all hover:bg-gray-200">
-                                                🗑️
-                                            </button>
-                                        </div>
-                                    </div>
-                                    ${word.image ? `<img src="${word.image}" alt="${word.term}" class="mt-3 rounded-xl w-full h-32 object-cover" onerror="this.style.display='none'">` : ''}
-                                </div>
-                            </div>
-                        `).join('')}
+                        ${activeWords.length > 0 ? activeWords.map(word => renderWordCard(word)).join('') : ''}
                         
                         ${masteredWords.length > 0 ? `
                             <div class="mt-6">
@@ -1242,28 +1257,19 @@
                                     <h3 class="font-bold text-xl text-gray-800">Ezberlenen Kelimeler</h3>
                                     <span class="text-sm text-purple-500">${masteredWords.length}</span>
                                 </div>
-                                ${masteredWords.map(word => `
-                                    <div class="bg-purple-50/80 backdrop-blur-sm rounded-2xl shadow-sm p-4 mb-2">
-                                        <div class="flex justify-between items-start">
-                                            <div class="flex-1">
-                                                <div class="flex items-center gap-2">
-                                                    <div class="font-bold text-lg text-gray-800">${word.term}</div>
-                                                    <span class="px-2 py-0.5 rounded-full text-xs text-white bg-purple-500">✓ Ezberlendi</span>
-                                                </div>
-                                                <div class="text-gray-600 text-sm mt-1">${word.definition}</div>
-                                                <div class="text-xs text-purple-600 mt-2">🎉 ${new Date(word.finishTime).toLocaleDateString('tr-TR')}</div>
-                                            </div>
-                                            <button onclick="event.stopPropagation(); window.deleteWord('${word.id}')" 
-                                                class="w-8 h-8 rounded-full bg-gray-200 text-red-500 flex items-center justify-center text-sm">
-                                                🗑️
-                                            </button>
-                                        </div>
-                                    </div>
-                                `).join('')}
+                                ${masteredWords.map(word => renderWordCard(word, true)).join('')}
                             </div>
                         ` : ''}
                         
-                        ${activeWords.length === 0 && masteredWords.length === 0 ? `
+                        ${totalFiltered === 0 && state.searchQuery ? `
+                            <div class="text-center py-16 bg-white/50 rounded-3xl">
+                                <div class="text-7xl mb-4">🔍</div>
+                                <p class="text-gray-500 mb-2">"${state.searchQuery}" için sonuç bulunamadı</p>
+                                <button onclick="window.clearSearch()" class="text-blue-500 underline text-sm">Aramayı temizle</button>
+                            </div>
+                        ` : ''}
+                        
+                        ${totalFiltered === 0 && !state.searchQuery ? `
                             <div class="text-center py-16 bg-white/50 rounded-3xl">
                                 <div class="text-7xl mb-4">📭</div>
                                 <p class="text-gray-500 mb-4">Henüz kelime eklenmemiş</p>
@@ -1301,6 +1307,9 @@
                             </button>
                         </div>
                     </div>
+                    
+                    <!-- Card Layout Settings -->
+                    ${renderCardFieldsSettings()}
                     
                     <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
                         <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
@@ -1360,10 +1369,178 @@
                                     <li>• 📊 Gelişmiş istatistikler</li>
                                     <li>• 🔥 Günlük çalışma serisi</li>
                                     <li>• 🎯 Puan sistemi</li>
+                                    <li>• 🎨 Özelleştirilebilir kart düzeni</li>
+                                    <li>• 🔍 Kelime arama</li>
                                 </ul>
                             </div>
                             <p class="mt-3">Toplam kelime: ${state.words.length}</p>
-                            <p class="text-xs text-gray-400 mt-2">v5.0.0</p>
+                            <p class="text-xs text-gray-400 mt-2">v6.0.0</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderEditModal = () => {
+            if (!state.showEditModal || !state.editingWord) return '';
+            
+            return `
+                <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeEditModal(event)">
+                    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-screen overflow-y-auto animate-scale-in" onclick="event.stopPropagation()">
+                        <div class="sticky top-0 bg-white border-b border-gray-100 p-5 rounded-t-2xl">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-2xl">✏️</span>
+                                    <h3 class="font-bold text-xl">Kelime Düzenle</h3>
+                                </div>
+                                <button onclick="window.closeEditModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
+                            </div>
+                        </div>
+                        <div class="p-5 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Kelime</label>
+                                <input type="text" id="editTerm" placeholder="Kelime" value="${(state.editingWord.term || '').replace(/"/g, '&quot;')}"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Anlamı</label>
+                                <input type="text" id="editDefinition" placeholder="Anlamı" value="${(state.editingWord.definition || '').replace(/"/g, '&quot;')}"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Görsel URL</label>
+                                <input type="text" id="editImage" placeholder="https://..." value="${(state.editingWord.image || '').replace(/"/g, '&quot;')}"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Eş Anlamlılar</label>
+                                <textarea id="editSynonyms" placeholder="Eş anlamlılar" rows="2"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">${state.editingWord.synonyms || ''}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Zıt Anlamlılar</label>
+                                <input type="text" id="editAntonyms" placeholder="Zıt anlamlılar" value="${(state.editingWord.antonyms || '').replace(/"/g, '&quot;')}"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Örnek Cümle</label>
+                                <textarea id="editExample" placeholder="Örnek cümle" rows="2"
+                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">${state.editingWord.exampleSentence || ''}</textarea>
+                            </div>
+                        </div>
+                        <div class="sticky bottom-0 bg-white border-t border-gray-100 p-5 rounded-b-2xl flex gap-3">
+                            <button onclick="window.saveEdit()"
+                                class="flex-1 bg-gradient-to-r from-green-500 to-blue-600 text-white py-3 rounded-xl font-semibold transition-all hover:shadow-lg active:scale-95">
+                                💾 Kaydet
+                            </button>
+                            <button onclick="window.closeEditModal()"
+                                class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold transition-all hover:bg-gray-200 active:scale-95">
+                                İptal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        const renderDetailModal = () => {
+            if (!state.showDetailModal || !state.detailWord) return '';
+            
+            const word = state.detailWord;
+            const config = LEVEL_CONFIG[word.level];
+            
+            return `
+                <div class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeDetailModal(event)">
+                    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto animate-scale-in" onclick="event.stopPropagation()">
+                        <div class="sticky top-0 bg-white rounded-t-3xl p-5 border-b border-gray-100">
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-3xl">${getLevelIcon(word.level)}</span>
+                                        <span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${config.bg}">Seviye ${word.level} • ${config.name}</span>
+                                    </div>
+                                    <div class="flex items-center gap-2 mt-2">
+                                        <h2 class="text-3xl font-bold text-gray-800">${word.term}</h2>
+                                        <button onclick="window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" 
+                                            class="speak-btn w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl transition-all hover:bg-blue-200 active:scale-90">
+                                            🔊
+                                        </button>
+                                    </div>
+                                </div>
+                                <button onclick="window.closeDetailModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
+                            </div>
+                        </div>
+                        
+                        <div class="p-5 space-y-5">
+                            ${state.cardFields.showImage && word.image ? `
+                                <div class="rounded-2xl overflow-hidden bg-gray-100">
+                                    <img src="${word.image}" alt="${word.term}" class="w-full h-64 object-cover">
+                                </div>
+                            ` : `
+                                <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 p-8 text-center">
+                                    <span class="text-6xl">📖</span>
+                                    <p class="text-gray-500 mt-2">Görsel eklenmemiş</p>
+                                </div>
+                            `}
+                            
+                            <div class="bg-gray-50 rounded-2xl p-5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="text-xl">📝</span>
+                                    <h3 class="font-semibold text-gray-700">Anlamı</h3>
+                                </div>
+                                <p class="text-gray-800 text-lg">${word.definition}</p>
+                            </div>
+                            
+                            ${state.cardFields.showSynonyms && word.synonyms ? `
+                                <div class="bg-green-50 rounded-2xl p-5">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xl">📖</span>
+                                        <h3 class="font-semibold text-green-700">Eş Anlamlılar</h3>
+                                    </div>
+                                    <p class="text-green-800">${word.synonyms}</p>
+                                </div>
+                            ` : ''}
+                            
+                            ${state.cardFields.showAntonyms && word.antonyms ? `
+                                <div class="bg-red-50 rounded-2xl p-5">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xl">⚡</span>
+                                        <h3 class="font-semibold text-red-700">Zıt Anlamlılar</h3>
+                                    </div>
+                                    <p class="text-red-800">${word.antonyms}</p>
+                                </div>
+                            ` : ''}
+                            
+                            ${state.cardFields.showExampleSentence && word.exampleSentence ? `
+                                <div class="bg-blue-50 rounded-2xl p-5">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <span class="text-xl">💬</span>
+                                        <h3 class="font-semibold text-blue-700">Örnek Cümle</h3>
+                                    </div>
+                                    <p class="text-blue-800 italic">"${word.exampleSentence}"</p>
+                                    <button onclick="window.speakText('${word.exampleSentence.replace(/'/g, "\\'")}', 'en')" 
+                                        class="mt-3 text-sm text-blue-600 flex items-center gap-1 hover:underline">
+                                        🔊 Cümleyi dinle
+                                    </button>
+                                </div>
+                            ` : ''}
+                            
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                                <div class="text-sm text-gray-500">
+                                    ${state.cardFields.showKademe ? `<div>Kademe: ${word.kademe}/${config.requiredStreak}</div>` : ''}
+                                    ${state.cardFields.showNextReview ? `<div>Sonraki tekrar: ${getNextReviewDate(word.nextReview)}</div>` : ''}
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="window.openEditModalFromDetail()" 
+                                        class="px-4 py-2 bg-blue-500 text-white rounded-xl text-sm font-semibold transition-all hover:bg-blue-600 active:scale-95">
+                                        ✏️ Düzenle
+                                    </button>
+                                    <button onclick="window.deleteWordFromDetail()" 
+                                        class="px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-semibold transition-all hover:bg-red-600 active:scale-95">
+                                        🗑️ Sil
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1538,7 +1715,7 @@
             `;
         };
 
-        // Global functions for onclick
+        // Global functions
         window.startQuiz = startQuiz;
         window.finishQuiz = finishQuiz;
         window.handleMultipleChoiceAnswer = handleMultipleChoiceAnswer;
@@ -1600,7 +1777,6 @@
             state.theme = theme; 
             saveToLocalStorage(); 
             render();
-            // Apply theme to body
             if (theme === 'dark') {
                 document.body.classList.add('dark-theme');
             } else {
@@ -1609,6 +1785,18 @@
         };
         window.changeSortType = (type) => { state.sortType = type; render(); };
         window.speakText = speakText;
+        window.toggleCardField = toggleCardField;
+        window.resetCardFields = resetCardFields;
+        window.searchWords = (query) => { 
+            state.searchQuery = query; 
+            render(); 
+        };
+        window.clearSearch = () => { 
+            state.searchQuery = ''; 
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+            render(); 
+        };
         window.saveQuizHours = () => {
             const startHour = parseInt(document.getElementById('startHour')?.value);
             const endHour = parseInt(document.getElementById('endHour')?.value);
@@ -1655,7 +1843,6 @@
         };
         
         loadFromLocalStorage();
-        // Apply initial theme
         if (state.theme === 'dark') {
             document.body.classList.add('dark-theme');
         }
