@@ -19,195 +19,51 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
-
         @keyframes fireAnimation {
             0% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.2); opacity: 0.8; }
             100% { transform: scale(1); opacity: 1; }
         }
+        .animate-slide-up { animation: slideUp 0.3s ease-out; }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+        .animate-scale-in { animation: scaleIn 0.3s ease-out; }
+        .animate-fire { animation: fireAnimation 0.5s ease-in-out; }
 
-        .animate-slide-up {
-            animation: slideUp 0.3s ease-out;
-        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 10px; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0); }
+        button:active { transform: scale(0.97); }
+        .speak-btn:active { transform: scale(0.9); }
+        .word-card:active { transform: scale(0.98); }
+        .modal-overlay { backdrop-filter: blur(8px); }
+        .progress-ring { transition: stroke-dashoffset 0.5s ease; }
 
-        .animate-fade-in {
-            animation: fadeIn 0.3s ease-out;
-        }
+        .dark-theme { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+        .dark-theme .bg-white, .dark-theme .bg-white\/90, .dark-theme .bg-white\/80 { background-color: rgba(30, 30, 46, 0.95) !important; color: #e0e0e0 !important; }
+        .dark-theme .text-gray-800, .dark-theme .text-gray-700, .dark-theme .text-gray-600 { color: #e0e0e0 !important; }
+        .dark-theme .text-gray-500, .dark-theme .text-gray-400 { color: #9ca3af !important; }
+        .dark-theme .border-gray-100, .dark-theme .border-gray-200 { border-color: #2d2d44 !important; }
+        .dark-theme .bg-gray-50, .dark-theme .bg-gray-100 { background-color: #2d2d44 !important; }
 
-        .animate-scale-in {
-            animation: scaleIn 0.3s ease-out;
-        }
-
-        .animate-fire {
-            animation: fireAnimation 0.5s ease-in-out;
-        }
-
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.05);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(0,0,0,0.2);
-            border-radius: 10px;
-        }
-
-        .pb-safe {
-            padding-bottom: env(safe-area-inset-bottom, 0);
-        }
-
-        button:active {
-            transform: scale(0.97);
-        }
-
-        .calendar-day {
-            transition: all 0.2s ease;
-        }
-
-        .calendar-day:active {
-            transform: scale(0.95);
-        }
-
-        .speak-btn {
-            transition: all 0.2s ease;
-        }
-
-        .speak-btn:active {
-            transform: scale(0.9);
-        }
-
-        .word-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .word-card:active {
-            transform: scale(0.98);
-        }
-
-        .modal-overlay {
-            backdrop-filter: blur(8px);
-        }
-
-        .progress-ring {
-            transition: stroke-dashoffset 0.5s ease;
-        }
-
-        /* Dark theme styles */
-        .dark-theme {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        }
-
-        .dark-theme .bg-white,
-        .dark-theme .bg-white\/90,
-        .dark-theme .bg-white\/80 {
-            background-color: rgba(30, 30, 46, 0.95) !important;
-            color: #e0e0e0 !important;
-        }
-
-        .dark-theme .text-gray-800,
-        .dark-theme .text-gray-700,
-        .dark-theme .text-gray-600 {
-            color: #e0e0e0 !important;
-        }
-
-        .dark-theme .text-gray-500,
-        .dark-theme .text-gray-400 {
-            color: #9ca3af !important;
-        }
-
-        .dark-theme .border-gray-100,
-        .dark-theme .border-gray-200 {
-            border-color: #2d2d44 !important;
-        }
-
-        .dark-theme .bg-gray-50,
-        .dark-theme .bg-gray-100 {
-            background-color: #2d2d44 !important;
-        }
-
-        /* Toggle Switch */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 44px;
-            height: 24px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: 0.3s;
-            border-radius: 24px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-        }
-
-        input:checked + .toggle-slider {
-            background-color: #3B82F6;
-        }
-
-        input:checked + .toggle-slider:before {
-            transform: translateX(20px);
-        }
-
-        /* Search bar animation */
-        .search-input {
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            transform: scale(1.02);
-        }
+        .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: 0.3s; border-radius: 24px; }
+        .toggle-slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: 0.3s; border-radius: 50%; }
+        input:checked + .toggle-slider { background-color: #3B82F6; }
+        input:checked + .toggle-slider:before { transform: translateX(20px); }
+        .search-input:focus { transform: scale(1.02); }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -217,15 +73,14 @@
     <script>
         // Level Configuration
         const LEVEL_CONFIG = {
-            1: { interval: 24, requiredStreak: 5, nextLevel: 2, fallbackLevel: 1, name: 'Başlangıç', color: '#3B82F6', bg: 'bg-blue-500', light: 'bg-blue-100' },
-            2: { interval: 48, requiredStreak: 3, nextLevel: 3, fallbackLevel: 1, name: 'Orta Başlangıç', color: '#10B981', bg: 'bg-green-500', light: 'bg-green-100' },
-            3: { interval: 120, requiredStreak: 3, nextLevel: 4, fallbackLevel: 2, name: 'Orta', color: '#F59E0B', bg: 'bg-yellow-500', light: 'bg-yellow-100' },
-            4: { interval: 240, requiredStreak: 2, nextLevel: 5, fallbackLevel: 3, name: 'İleri', color: '#F97316', bg: 'bg-orange-500', light: 'bg-orange-100' },
-            5: { interval: 360, requiredStreak: 2, nextLevel: 6, fallbackLevel: 4, name: 'Uzman', color: '#EF4444', bg: 'bg-red-500', light: 'bg-red-100' },
-            6: { interval: 0, requiredStreak: 0, nextLevel: 6, fallbackLevel: 5, name: 'Ezberlendi', color: '#8B5CF6', bg: 'bg-purple-500', light: 'bg-purple-100' }
+            1: { interval: 24, requiredStreak: 5, nextLevel: 2, fallbackLevel: 1, name: 'Başlangıç', color: '#3B82F6', bg: 'bg-blue-500' },
+            2: { interval: 48, requiredStreak: 3, nextLevel: 3, fallbackLevel: 1, name: 'Orta Başlangıç', color: '#10B981', bg: 'bg-green-500' },
+            3: { interval: 120, requiredStreak: 3, nextLevel: 4, fallbackLevel: 2, name: 'Orta', color: '#F59E0B', bg: 'bg-yellow-500' },
+            4: { interval: 240, requiredStreak: 2, nextLevel: 5, fallbackLevel: 3, name: 'İleri', color: '#F97316', bg: 'bg-orange-500' },
+            5: { interval: 360, requiredStreak: 2, nextLevel: 6, fallbackLevel: 4, name: 'Uzman', color: '#EF4444', bg: 'bg-red-500' },
+            6: { interval: 0, requiredStreak: 0, nextLevel: 6, fallbackLevel: 5, name: 'Ezberlendi', color: '#8B5CF6', bg: 'bg-purple-500' }
         };
 
-        // Available card field types
         const CARD_FIELD_TYPES = [
             { id: 'showSynonyms', label: 'Eş Anlamlılar', icon: '📖', default: true },
             { id: 'showAntonyms', label: 'Zıt Anlamlılar', icon: '⚡', default: true },
@@ -236,95 +91,67 @@
             { id: 'showNextReview', label: 'Sonraki Tekrar', icon: '📅', default: true },
             { id: 'showSpeakButtons', label: 'Seslendirme Butonları', icon: '🔊', default: true }
         ];
+        const DEFAULT_CARD_FIELDS = Object.fromEntries(CARD_FIELD_TYPES.map(f => [f.id, true]));
 
-        // Default card field visibility settings
-        const DEFAULT_CARD_FIELDS = {
-            showSynonyms: true,
-            showAntonyms: true,
-            showExampleSentence: true,
-            showImage: true,
-            showLevelBadge: true,
-            showKademe: true,
-            showNextReview: true,
-            showSpeakButtons: true
-        };
-
-        // Initial demo words
         const INITIAL_WORDS = [
-            { 
-                id: '1', term: 'Apple', definition: 'Elma', level: 1, kademe: 0, nextReview: Date.now(), finishTime: null,
-                image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300', synonyms: 'Elma', antonyms: '', exampleSentence: 'I eat an apple every day.'
-            },
-            { 
-                id: '2', term: 'Car', definition: 'Araba', level: 2, kademe: 1, nextReview: Date.now(), finishTime: null,
-                image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=300', synonyms: 'Vehicle, Automobile', antonyms: '', exampleSentence: 'My car is red.'
-            },
-            { 
-                id: '3', term: 'Beautiful', definition: 'Güzel', level: 3, kademe: 2, nextReview: Date.now(), finishTime: null,
-                image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300', synonyms: 'Pretty, Lovely, Attractive', antonyms: 'Ugly', exampleSentence: 'The sunset is beautiful.'
-            },
-            { 
-                id: '4', term: 'Fast', definition: 'Hızlı', level: 1, kademe: 2, nextReview: Date.now(), finishTime: null,
-                image: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=300', synonyms: 'Quick, Rapid, Swift', antonyms: 'Slow', exampleSentence: 'He runs very fast.'
-            },
-            { 
-                id: '5', term: 'Computer', definition: 'Bilgisayar', level: 2, kademe: 0, nextReview: Date.now(), finishTime: null,
-                image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300', synonyms: 'PC, Laptop', antonyms: '', exampleSentence: 'I work on my computer.'
-            },
-            { 
-                id: '6', term: 'Happy', definition: 'Mutlu', level: 1, kademe: 3, nextReview: Date.now(), finishTime: null,
-                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=300', synonyms: 'Joyful, Glad', antonyms: 'Sad', exampleSentence: 'She is very happy today.'
-            },
-            { 
-                id: '7', term: 'Big', definition: 'Büyük', level: 2, kademe: 1, nextReview: Date.now(), finishTime: null,
-                image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300', synonyms: 'Large, Huge', antonyms: 'Small', exampleSentence: 'This is a big house.'
-            }
+            { id: '1', term: 'Apple', definition: 'Elma', level: 1, kademe: 0, nextReview: Date.now(), finishTime: null,
+              image: 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=300', synonyms: 'Elma', antonyms: '', exampleSentence: 'I eat an apple every day.' },
+            { id: '2', term: 'Car', definition: 'Araba', level: 2, kademe: 1, nextReview: Date.now(), finishTime: null,
+              image: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=300', synonyms: 'Vehicle, Automobile', antonyms: '', exampleSentence: 'My car is red.' },
+            { id: '3', term: 'Beautiful', definition: 'Güzel', level: 3, kademe: 2, nextReview: Date.now(), finishTime: null,
+              image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=300', synonyms: 'Pretty, Lovely, Attractive', antonyms: 'Ugly', exampleSentence: 'The sunset is beautiful.' },
+            { id: '4', term: 'Fast', definition: 'Hızlı', level: 1, kademe: 2, nextReview: Date.now(), finishTime: null,
+              image: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=300', synonyms: 'Quick, Rapid, Swift', antonyms: 'Slow', exampleSentence: 'He runs very fast.' },
+            { id: '5', term: 'Computer', definition: 'Bilgisayar', level: 2, kademe: 0, nextReview: Date.now(), finishTime: null,
+              image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=300', synonyms: 'PC, Laptop', antonyms: '', exampleSentence: 'I work on my computer.' }
         ];
 
-        // App State
         let state = {
-            words: [],
-            activeTab: 'home',
-            showQuiz: false,
-            quizType: 'multiple-choice',
-            currentQuestion: null,
-            quizWords: [],
-            quizIndex: 0,
-            feedback: null,
-            theme: 'light',
-            quizStartHour: 0,
-            quizEndHour: 23,
-            showAddForm: false,
-            showEditModal: false,
-            showDetailModal: false,
-            showCardSettings: false,
-            detailWord: null,
-            editingWord: null,
-            newWord: {
-                term: '',
-                definition: '',
-                image: '',
-                synonyms: '',
-                antonyms: '',
-                exampleSentence: ''
-            },
-            sortType: 'newest',
-            quizHistory: [],
-            writingAnswer: '',
-            streakDays: 0,
-            totalPoints: 0,
-            cardFields: { ...DEFAULT_CARD_FIELDS },
-            searchQuery: ''
+            words: [], activeTab: 'home', showQuiz: false, quizType: 'multiple-choice',
+            currentQuestion: null, quizWords: [], quizIndex: 0, feedback: null,
+            theme: 'light', quizStartHour: 0, quizEndHour: 23, showAddForm: false,
+            showEditModal: false, showDetailModal: false,
+            detailWord: null, editingWord: null, sortType: 'newest', quizHistory: [],
+            writingAnswer: '', streakDays: 0, totalPoints: 0, searchQuery: '',
+            newWord: { term: '', definition: '', image: '', synonyms: '', antonyms: '', exampleSentence: '' },
+            cardFields: { ...DEFAULT_CARD_FIELDS }
         };
 
-        // Helper Functions
+        // ==================== DÜZELTİLMİŞ STREAK HESAPLAMA ====================
+        const calculateStreak = () => {
+            if (!state.quizHistory.length) return 0;
+            // Benzersiz tarihleri al (gün bazında)
+            let uniqueDates = [...new Set(state.quizHistory.map(d => new Date(d).toDateString()))];
+            uniqueDates.sort((a, b) => new Date(a) - new Date(b));
+            
+            // Mevcut seriyi hesapla (bugünden geriye doğru)
+            let currentStreak = 0;
+            let today = new Date().toDateString();
+            
+            for (let i = uniqueDates.length - 1; i >= 0; i--) {
+                let expectedDate = new Date();
+                expectedDate.setDate(expectedDate.getDate() - currentStreak);
+                if (uniqueDates[i] === expectedDate.toDateString()) {
+                    currentStreak++;
+                } else {
+                    break;
+                }
+            }
+            return currentStreak;
+        };
+
+        const updateStreakFromHistory = () => {
+            state.streakDays = calculateStreak();
+            saveToLocalStorage();
+        };
+        // ====================================================================
+
         const saveToLocalStorage = () => {
             localStorage.setItem('srs_words', JSON.stringify(state.words));
             localStorage.setItem('srs_theme', state.theme);
             localStorage.setItem('quiz_start_hour', state.quizStartHour);
             localStorage.setItem('quiz_end_hour', state.quizEndHour);
             localStorage.setItem('quiz_history', JSON.stringify(state.quizHistory));
-            localStorage.setItem('streak_days', state.streakDays);
             localStorage.setItem('total_points', state.totalPoints);
             localStorage.setItem('card_fields', JSON.stringify(state.cardFields));
         };
@@ -335,48 +162,18 @@
             state.theme = localStorage.getItem('srs_theme') || 'light';
             state.quizStartHour = parseInt(localStorage.getItem('quiz_start_hour')) || 0;
             state.quizEndHour = parseInt(localStorage.getItem('quiz_end_hour')) || 23;
-            const savedHistory = localStorage.getItem('quiz_history');
-            state.quizHistory = savedHistory ? JSON.parse(savedHistory) : [];
-            state.streakDays = parseInt(localStorage.getItem('streak_days')) || 0;
+            state.quizHistory = localStorage.getItem('quiz_history') ? JSON.parse(localStorage.getItem('quiz_history')) : [];
             state.totalPoints = parseInt(localStorage.getItem('total_points')) || 0;
-            const savedCardFields = localStorage.getItem('card_fields');
-            state.cardFields = savedCardFields ? JSON.parse(savedCardFields) : { ...DEFAULT_CARD_FIELDS };
-            updateStreakAndPoints();
-        };
-
-        const updateStreakAndPoints = () => {
-            const today = new Date().toDateString();
-            const lastQuizDate = state.quizHistory.length > 0 ? new Date(state.quizHistory[state.quizHistory.length - 1]) : null;
-            const yesterday = new Date();
-            yesterday.setDate(yesterday.getDate() - 1);
-            
-            if (lastQuizDate) {
-                const lastDateStr = lastQuizDate.toDateString();
-                const todayStr = new Date().toDateString();
-                
-                if (lastDateStr === todayStr) {
-                } else if (lastDateStr === yesterday.toDateString()) {
-                    state.streakDays++;
-                } else {
-                    state.streakDays = 1;
-                }
-            }
-            
-            saveToLocalStorage();
+            state.cardFields = localStorage.getItem('card_fields') ? JSON.parse(localStorage.getItem('card_fields')) : { ...DEFAULT_CARD_FIELDS };
+            state.streakDays = calculateStreak();
         };
 
         const addPoints = (points) => {
             state.totalPoints += points;
             saveToLocalStorage();
             render();
-            
-            const pointElement = document.getElementById('points-display');
-            if (pointElement) {
-                pointElement.classList.add('animate-fire');
-                setTimeout(() => {
-                    if (pointElement) pointElement.classList.remove('animate-fire');
-                }, 500);
-            }
+            const el = document.getElementById('points-display');
+            if (el) { el.classList.add('animate-fire'); setTimeout(() => el.classList.remove('animate-fire'), 500); }
         };
 
         const getDueWords = () => {
@@ -392,59 +189,33 @@
 
         const updateWordAfterAnswer = (word, isCorrect) => {
             if (isCorrect) {
-                const newKademe = word.kademe + 1;
-                const config = LEVEL_CONFIG[word.level];
-                
+                let newKademe = word.kademe + 1;
+                let config = LEVEL_CONFIG[word.level];
                 addPoints(10);
-                
                 if (newKademe >= config.requiredStreak) {
-                    const nextLevel = config.nextLevel;
+                    let nextLevel = config.nextLevel;
                     addPoints(50);
                     if (nextLevel === 6) {
-                        return {
-                            ...word,
-                            level: 6,
-                            kademe: 0,
-                            nextReview: Date.now(),
-                            finishTime: Date.now()
-                        };
+                        return { ...word, level: 6, kademe: 0, nextReview: Date.now(), finishTime: Date.now() };
                     } else {
-                        return {
-                            ...word,
-                            level: nextLevel,
-                            kademe: 0,
-                            nextReview: Date.now() + (LEVEL_CONFIG[nextLevel].interval * 60 * 60 * 1000)
-                        };
+                        return { ...word, level: nextLevel, kademe: 0, nextReview: Date.now() + (LEVEL_CONFIG[nextLevel].interval * 60 * 60 * 1000) };
                     }
                 } else {
-                    return {
-                        ...word,
-                        kademe: newKademe,
-                        nextReview: Date.now() + (config.interval * 60 * 60 * 1000)
-                    };
+                    return { ...word, kademe: newKademe, nextReview: Date.now() + (config.interval * 60 * 60 * 1000) };
                 }
             } else {
                 if (word.level === 1) {
-                    return {
-                        ...word,
-                        kademe: 0,
-                        nextReview: Date.now() + (LEVEL_CONFIG[1].interval * 60 * 60 * 1000)
-                    };
+                    return { ...word, kademe: 0, nextReview: Date.now() + (LEVEL_CONFIG[1].interval * 60 * 60 * 1000) };
                 } else {
-                    const fallbackLevel = LEVEL_CONFIG[word.level].fallbackLevel;
-                    return {
-                        ...word,
-                        level: fallbackLevel,
-                        kademe: 0,
-                        nextReview: Date.now() + (LEVEL_CONFIG[fallbackLevel].interval * 60 * 60 * 1000)
-                    };
+                    let fallbackLevel = LEVEL_CONFIG[word.level].fallbackLevel;
+                    return { ...word, level: fallbackLevel, kademe: 0, nextReview: Date.now() + (LEVEL_CONFIG[fallbackLevel].interval * 60 * 60 * 1000) };
                 }
             }
         };
 
         const speakText = (text, lang = 'en') => {
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
+                let utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = lang;
                 utterance.rate = 0.9;
                 window.speechSynthesis.cancel();
@@ -454,101 +225,110 @@
             }
         };
 
-        const generateDistractors = (correctWord) => {
-            const otherWords = state.words.filter(w => 
-                w.id !== correctWord.id && 
-                w.definition !== correctWord.definition &&
-                w.level !== 6
-            );
-            
-            const shuffled = [...otherWords].sort(() => Math.random() - 0.5);
-            const distractors = shuffled.slice(0, 3).map(w => w.definition);
-            
+        const generateDistractors = (correctWord, type = 'definition') => {
+            let otherWords = state.words.filter(w => w.id !== correctWord.id && w.level !== 6);
+            let shuffled = [...otherWords].sort(() => Math.random() - 0.5);
+            let distractors = shuffled.slice(0, 3).map(w => type === 'definition' ? w.definition : w.term);
             while (distractors.length < 3) {
-                distractors.push(`Anlam ${distractors.length + 1}`);
+                distractors.push(type === 'definition' ? `Anlam ${distractors.length + 1}` : `Kelime ${distractors.length + 1}`);
             }
-            
             return distractors;
         };
 
-        const generateQuestion = (wordsList, index) => {
-            if (index >= wordsList.length) {
-                if (state.quizType === 'multiple-choice') {
-                    state.quizType = 'writing';
-                    state.quizIndex = 0;
-                    generateWritingQuestion(wordsList, 0);
-                } else {
-                    finishQuiz();
-                }
-                return;
+        const createClozeSentence = (word) => {
+            let sentence = word.exampleSentence && word.exampleSentence.trim() ? word.exampleSentence : `_____ is very important.`;
+            let term = word.term;
+            let regex = new RegExp(`\\b${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+            if (regex.test(sentence)) {
+                return sentence.replace(regex, '_____');
             }
-            
-            const currentWord = wordsList[index];
-            const distractors = generateDistractors(currentWord);
-            const options = [...distractors, currentWord.definition];
-            const shuffledOptions = options.sort(() => Math.random() - 0.5);
-            
-            state.currentQuestion = {
-                word: currentWord,
-                options: shuffledOptions,
-                correctAnswer: currentWord.definition,
-                type: 'multiple-choice'
-            };
+            return sentence;
+        };
+
+        // Quiz Functions
+        const generateMultipleChoiceQuestion = (wordsList, index) => {
+            if (index >= wordsList.length) { nextQuizStage(); return; }
+            let word = wordsList[index];
+            let distractors = generateDistractors(word, 'definition');
+            let options = [...distractors, word.definition];
+            let shuffled = options.sort(() => Math.random() - 0.5);
+            state.currentQuestion = { word: word, options: shuffled, correctAnswer: word.definition, type: 'multiple-choice' };
+            render();
+        };
+
+        const generateClozeQuestion = (wordsList, index) => {
+            if (index >= wordsList.length) { nextQuizStage(); return; }
+            let word = wordsList[index];
+            let clozeSentence = createClozeSentence(word);
+            let distractors = generateDistractors(word, 'term');
+            let options = [...distractors, word.term];
+            let shuffled = options.sort(() => Math.random() - 0.5);
+            state.currentQuestion = { word: word, clozeSentence: clozeSentence, options: shuffled, correctAnswer: word.term, type: 'cloze' };
             render();
         };
 
         const generateWritingQuestion = (wordsList, index) => {
-            if (index >= wordsList.length) {
-                finishQuiz();
-                return;
-            }
-            
-            const currentWord = wordsList[index];
-            state.currentQuestion = {
-                word: currentWord,
-                correctAnswer: currentWord.term,
-                type: 'writing'
-            };
+            if (index >= wordsList.length) { finishQuiz(); return; }
+            state.currentQuestion = { word: wordsList[index], correctAnswer: wordsList[index].term, type: 'writing' };
             state.writingAnswer = '';
             render();
         };
 
-        const handleMultipleChoiceAnswer = (selectedAnswer) => {
-            if (!state.currentQuestion) return;
-            
-            const isCorrect = selectedAnswer === state.currentQuestion.correctAnswer;
-            
-            state.feedback = {
-                isCorrect,
-                correctAnswer: state.currentQuestion.correctAnswer
-            };
-            
-            const updatedWord = updateWordAfterAnswer(state.currentQuestion.word, isCorrect);
-            const wordIndex = state.words.findIndex(w => w.id === updatedWord.id);
-            if (wordIndex !== -1) {
-                state.words[wordIndex] = updatedWord;
+        const nextQuizStage = () => {
+            if (state.quizType === 'multiple-choice') {
+                state.quizType = 'cloze';
+                state.quizIndex = 0;
+                generateClozeQuestion(state.quizWords, 0);
+            } else if (state.quizType === 'cloze') {
+                state.quizType = 'writing';
+                state.quizIndex = 0;
+                generateWritingQuestion(state.quizWords, 0);
+            } else {
+                finishQuiz();
             }
-            
+        };
+
+        const handleMultipleChoiceAnswer = (selected) => {
+            if (!state.currentQuestion) return;
+            let isCorrect = selected === state.currentQuestion.correctAnswer;
+            state.feedback = { isCorrect, correctAnswer: state.currentQuestion.correctAnswer };
+            let updated = updateWordAfterAnswer(state.currentQuestion.word, isCorrect);
+            let idx = state.words.findIndex(w => w.id === updated.id);
+            if (idx !== -1) state.words[idx] = updated;
             saveToLocalStorage();
-            
             setTimeout(() => {
                 state.feedback = null;
-                const nextIndex = state.quizIndex + 1;
-                if (nextIndex < state.quizWords.length) {
-                    state.quizIndex = nextIndex;
-                    generateQuestion(state.quizWords, nextIndex);
+                let nextIdx = state.quizIndex + 1;
+                if (nextIdx < state.quizWords.length) {
+                    state.quizIndex = nextIdx;
+                    generateMultipleChoiceQuestion(state.quizWords, nextIdx);
                 } else {
-                    if (state.quizType === 'multiple-choice') {
-                        state.quizType = 'writing';
-                        state.quizIndex = 0;
-                        generateWritingQuestion(state.quizWords, 0);
-                    } else {
-                        finishQuiz();
-                    }
+                    nextQuizStage();
                 }
                 render();
             }, 1500);
-            
+            render();
+        };
+
+        const handleClozeAnswer = (selected) => {
+            if (!state.currentQuestion) return;
+            let isCorrect = selected === state.currentQuestion.correctAnswer;
+            state.feedback = { isCorrect, correctAnswer: state.currentQuestion.correctAnswer };
+            let updated = updateWordAfterAnswer(state.currentQuestion.word, isCorrect);
+            let idx = state.words.findIndex(w => w.id === updated.id);
+            if (idx !== -1) state.words[idx] = updated;
+            saveToLocalStorage();
+            setTimeout(() => {
+                state.feedback = null;
+                let nextIdx = state.quizIndex + 1;
+                if (nextIdx < state.quizWords.length) {
+                    state.quizIndex = nextIdx;
+                    generateClozeQuestion(state.quizWords, nextIdx);
+                } else {
+                    nextQuizStage();
+                }
+                render();
+            }, 1500);
             render();
         };
 
@@ -557,59 +337,47 @@
                 alert('Lütfen bir cevap yazın!');
                 return;
             }
-            
-            const isCorrect = state.writingAnswer.trim().toLowerCase() === state.currentQuestion.correctAnswer.toLowerCase();
-            
-            state.feedback = {
-                isCorrect,
-                correctAnswer: state.currentQuestion.correctAnswer
-            };
-            
-            const updatedWord = updateWordAfterAnswer(state.currentQuestion.word, isCorrect);
-            const wordIndex = state.words.findIndex(w => w.id === updatedWord.id);
-            if (wordIndex !== -1) {
-                state.words[wordIndex] = updatedWord;
-            }
+            let isCorrect = state.writingAnswer.trim().toLowerCase() === state.currentQuestion.correctAnswer.toLowerCase();
+            state.feedback = { isCorrect, correctAnswer: state.currentQuestion.correctAnswer };
+            let updated = updateWordAfterAnswer(state.currentQuestion.word, isCorrect);
+            let idx = state.words.findIndex(w => w.id === updated.id);
+            if (idx !== -1) state.words[idx] = updated;
             
             if (state.quizIndex === state.quizWords.length - 1 && state.quizType === 'writing') {
-                const today = new Date().toDateString();
+                let today = new Date().toDateString();
                 if (!state.quizHistory.includes(today)) {
                     state.quizHistory.push(today);
-                    updateStreakAndPoints();
+                    updateStreakFromHistory();
                     addPoints(100);
                     saveToLocalStorage();
                 }
             }
-            
             saveToLocalStorage();
-            
             setTimeout(() => {
                 state.feedback = null;
-                const nextIndex = state.quizIndex + 1;
-                if (nextIndex < state.quizWords.length) {
-                    state.quizIndex = nextIndex;
-                    generateWritingQuestion(state.quizWords, nextIndex);
+                let nextIdx = state.quizIndex + 1;
+                if (nextIdx < state.quizWords.length) {
+                    state.quizIndex = nextIdx;
+                    generateWritingQuestion(state.quizWords, nextIdx);
                 } else {
                     finishQuiz();
                 }
                 render();
             }, 1500);
-            
             render();
         };
 
         const startQuiz = () => {
-            const due = getDueWords();
+            let due = getDueWords();
             if (due.length < 5) {
                 alert('Sınav başlatmak için en az 5 kelimeye ihtiyacınız var!');
                 return;
             }
-            
             state.quizWords = [...due];
             state.quizIndex = 0;
             state.quizType = 'multiple-choice';
             state.showQuiz = true;
-            generateQuestion(state.quizWords, 0);
+            generateMultipleChoiceQuestion(state.quizWords, 0);
         };
 
         const finishQuiz = () => {
@@ -628,8 +396,7 @@
                 alert('Lütfen kelime ve anlamını girin!');
                 return;
             }
-            
-            const newWord = {
+            let newWord = {
                 id: Date.now().toString(),
                 term: state.newWord.term.trim(),
                 definition: state.newWord.definition.trim(),
@@ -642,16 +409,8 @@
                 antonyms: state.newWord.antonyms.trim(),
                 exampleSentence: state.newWord.exampleSentence.trim()
             };
-            
             state.words.unshift(newWord);
-            state.newWord = {
-                term: '',
-                definition: '',
-                image: '',
-                synonyms: '',
-                antonyms: '',
-                exampleSentence: ''
-            };
+            state.newWord = { term: '', definition: '', image: '', synonyms: '', antonyms: '', exampleSentence: '' };
             state.showAddForm = false;
             saveToLocalStorage();
             render();
@@ -659,13 +418,11 @@
 
         const updateWord = () => {
             if (!state.editingWord) return;
-            
-            const index = state.words.findIndex(w => w.id === state.editingWord.id);
-            if (index !== -1) {
-                state.words[index] = { ...state.editingWord };
+            let idx = state.words.findIndex(w => w.id === state.editingWord.id);
+            if (idx !== -1) {
+                state.words[idx] = { ...state.editingWord };
                 saveToLocalStorage();
             }
-            
             state.showEditModal = false;
             state.editingWord = null;
             render();
@@ -691,36 +448,21 @@
             render();
         };
 
-        const toggleCardField = (fieldId) => {
-            state.cardFields[fieldId] = !state.cardFields[fieldId];
-            saveToLocalStorage();
-            render();
-        };
-
-        const resetCardFields = () => {
-            state.cardFields = { ...DEFAULT_CARD_FIELDS };
-            saveToLocalStorage();
-            render();
-        };
-
         const exportData = () => {
-            const dataStr = JSON.stringify(state.words, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `srs_backup_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-            URL.revokeObjectURL(url);
+            let a = document.createElement('a');
+            a.href = URL.createObjectURL(new Blob([JSON.stringify(state.words, null, 2)], { type: 'application/json' }));
+            a.download = `srs_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(a.href);
         };
 
-        const importData = (event) => {
-            const file = event.target.files[0];
+        const importData = (e) => {
+            let file = e.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
+                let r = new FileReader();
+                r.onload = ev => {
                     try {
-                        const imported = JSON.parse(e.target.result);
+                        let imported = JSON.parse(ev.target.result);
                         if (Array.isArray(imported)) {
                             state.words = imported;
                             saveToLocalStorage();
@@ -733,1076 +475,192 @@
                         alert('Dosya okunamadı!');
                     }
                 };
-                reader.readAsText(file);
+                r.readAsText(file);
             }
         };
 
         const getFilteredAndSortedWords = () => {
             let filtered = [...state.words];
-            
-            // Apply search filter
             if (state.searchQuery.trim()) {
-                const query = state.searchQuery.toLowerCase().trim();
-                filtered = filtered.filter(word => 
-                    word.term.toLowerCase().includes(query) || 
-                    word.definition.toLowerCase().includes(query)
-                );
+                let q = state.searchQuery.toLowerCase();
+                filtered = filtered.filter(w => w.term.toLowerCase().includes(q) || w.definition.toLowerCase().includes(q));
             }
-            
-            // Apply sort
-            switch(state.sortType) {
-                case 'newest':
-                    return filtered.sort((a, b) => parseInt(b.id) - parseInt(a.id));
-                case 'oldest':
-                    return filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
-                case 'levelAsc':
-                    return filtered.sort((a, b) => a.level - b.level);
-                case 'levelDesc':
-                    return filtered.sort((a, b) => b.level - a.level);
-                default:
-                    return filtered;
+            switch (state.sortType) {
+                case 'newest': return filtered.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+                case 'oldest': return filtered.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+                case 'levelAsc': return filtered.sort((a, b) => a.level - b.level);
+                case 'levelDesc': return filtered.sort((a, b) => b.level - a.level);
+                default: return filtered;
             }
         };
 
         const getLevelStats = () => {
-            const stats = {};
-            for (let i = 1; i <= 6; i++) {
-                stats[i] = state.words.filter(w => w.level === i).length;
-            }
-            return stats;
+            let s = {};
+            for (let i = 1; i <= 6; i++) s[i] = state.words.filter(w => w.level === i).length;
+            return s;
         };
 
-        const getNextReviewDate = (timestamp) => {
-            return new Date(timestamp).toLocaleDateString('tr-TR');
-        };
-
-        const getLevelColor = (level) => {
-            return LEVEL_CONFIG[level]?.bg || 'bg-gray-500';
-        };
-
-        const getLevelIcon = (level) => {
-            const icons = {
-                1: '🌱',
-                2: '🌿',
-                3: '🌟',
-                4: '⭐',
-                5: '🏆',
-                6: '👑'
-            };
-            return icons[level] || '📚';
-        };
-
+        const getNextReviewDate = (ts) => new Date(ts).toLocaleDateString('tr-TR');
+        const getLevelColor = (l) => LEVEL_CONFIG[l]?.bg || 'bg-gray-500';
+        const getLevelIcon = (l) => ({ 1: '🌱', 2: '🌿', 3: '🌟', 4: '⭐', 5: '🏆', 6: '👑' }[l] || '📚');
         const getStreakIcon = () => {
-            if (state.streakDays >= 30) return '🏆🔥';
-            if (state.streakDays >= 15) return '⚡🔥';
-            if (state.streakDays >= 7) return '🔥';
-            if (state.streakDays >= 3) return '📈';
+            let d = state.streakDays;
+            if (d >= 30) return '🏆🔥';
+            if (d >= 15) return '⚡🔥';
+            if (d >= 7) return '🔥';
+            if (d >= 3) return '📈';
             return '🌱';
         };
 
-        const renderCardFieldsSettings = () => {
-            return `
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5 mb-5">
-                    <div class="flex justify-between items-center mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="text-2xl">🎨</span>
-                            <h3 class="font-bold text-gray-800">Kart Düzeni Özelleştirme</h3>
-                        </div>
-                        <button onclick="window.resetCardFields()" 
-                            class="text-sm text-blue-500 px-3 py-1 rounded-lg bg-blue-50 hover:bg-blue-100 transition-all">
-                            Varsayılana Dön
-                        </button>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-4">Kelime kartlarında hangi bilgilerin görüneceğini seçin</p>
-                    <div class="grid grid-cols-2 gap-3">
-                        ${CARD_FIELD_TYPES.map(field => `
-                            <label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-all">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-lg">${field.icon}</span>
-                                    <span class="text-sm font-medium text-gray-700">${field.label}</span>
-                                </div>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="${field.id}" ${state.cardFields[field.id] ? 'checked' : ''} onchange="window.toggleCardField('${field.id}')">
-                                    <span class="toggle-slider"></span>
-                                </div>
-                            </label>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
+        const toggleCardField = (id) => {
+            state.cardFields[id] = !state.cardFields[id];
+            saveToLocalStorage();
+            render();
         };
 
-        const renderWordCard = (word, isMastered = false) => {
-            const config = LEVEL_CONFIG[word.level];
-            
-            return `
-                <div class="word-card bg-white/90 backdrop-blur-sm rounded-2xl shadow-md overflow-hidden transition-all active:scale-98" 
-                    onclick="window.openDetailModal(${JSON.stringify(word).replace(/"/g, '&quot;')})">
-                    <div class="p-4">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <div class="flex items-center gap-2 flex-wrap">
-                                    <div class="font-bold text-lg text-gray-800">${word.term}</div>
-                                    ${state.cardFields.showLevelBadge ? `
-                                        <span class="px-2 py-0.5 rounded-full text-xs text-white ${getLevelColor(word.level)}">Lv${word.level}</span>
-                                    ` : ''}
-                                    ${isMastered ? '<span class="px-2 py-0.5 rounded-full text-xs text-white bg-purple-500">✓ Ezberlendi</span>' : ''}
-                                    ${state.cardFields.showSpeakButtons ? `
-                                        <div class="flex gap-1">
-                                            <button onclick="event.stopPropagation(); window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" 
-                                                class="speak-btn w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm transition-all">
-                                                🔊
-                                            </button>
-                                            <button onclick="event.stopPropagation(); window.speakText('${word.definition.replace(/'/g, "\\'")}', 'tr')" 
-                                                class="speak-btn w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm transition-all">
-                                                🎤
-                                            </button>
-                                        </div>
-                                    ` : ''}
-                                </div>
-                                <div class="text-gray-600 text-sm mt-1">${word.definition}</div>
-                                
-                                ${state.cardFields.showSynonyms && word.synonyms ? `
-                                    <div class="text-xs text-green-600 mt-2">📖 Eş: ${word.synonyms}</div>
-                                ` : ''}
-                                
-                                ${state.cardFields.showAntonyms && word.antonyms ? `
-                                    <div class="text-xs text-red-600">⚡ Zıt: ${word.antonyms}</div>
-                                ` : ''}
-                                
-                                ${state.cardFields.showExampleSentence && word.exampleSentence ? `
-                                    <div class="text-xs text-blue-600 italic mt-2 line-clamp-1">💬 "${word.exampleSentence.substring(0, 60)}${word.exampleSentence.length > 60 ? '...' : ''}"</div>
-                                ` : ''}
-                                
-                                <div class="flex items-center gap-3 mt-2">
-                                    ${state.cardFields.showKademe ? `
-                                        <div class="flex items-center gap-1">
-                                            <span class="text-xs text-gray-400">Kademe:</span>
-                                            <span class="text-xs font-medium">${word.kademe}/${LEVEL_CONFIG[word.level].requiredStreak}</span>
-                                        </div>
-                                    ` : ''}
-                                    ${state.cardFields.showKademe && state.cardFields.showNextReview ? `<div class="w-1 h-1 bg-gray-300 rounded-full"></div>` : ''}
-                                    ${state.cardFields.showNextReview ? `
-                                        <div class="text-xs text-gray-400">📅 ${getNextReviewDate(word.nextReview)}</div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                            <div class="flex gap-1">
-                                <button onclick="event.stopPropagation(); window.openEditModal(${JSON.stringify(word).replace(/"/g, '&quot;')})" 
-                                    class="w-8 h-8 rounded-full bg-gray-100 text-blue-500 flex items-center justify-center text-sm transition-all hover:bg-gray-200">
-                                    ✏️
-                                </button>
-                                <button onclick="event.stopPropagation(); window.deleteWord('${word.id}')" 
-                                    class="w-8 h-8 rounded-full bg-gray-100 text-red-500 flex items-center justify-center text-sm transition-all hover:bg-gray-200">
-                                    🗑️
-                                </button>
-                            </div>
-                        </div>
-                        ${state.cardFields.showImage && word.image ? `
-                            <img src="${word.image}" alt="${word.term}" class="mt-3 rounded-xl w-full h-32 object-cover" onerror="this.style.display='none'">
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-        };
-
-        const renderCalendar = () => {
-            const today = new Date();
-            const currentMonth = today.getMonth();
-            const currentYear = today.getFullYear();
-            const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
-            const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
-            const daysInMonth = lastDayOfMonth.getDate();
-            const startDayOfWeek = firstDayOfMonth.getDay();
-            
-            const calendarDays = [];
-            const quizDates = new Set(state.quizHistory);
-            
-            const adjustedStartDay = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
-            
-            for (let i = 0; i < adjustedStartDay; i++) {
-                calendarDays.push(null);
-            }
-            
-            for (let day = 1; day <= daysInMonth; day++) {
-                const date = new Date(currentYear, currentMonth, day);
-                const dateString = date.toDateString();
-                const hasQuiz = quizDates.has(dateString);
-                const isToday = date.toDateString() === today.toDateString();
-                calendarDays.push({ day, hasQuiz, isToday });
-            }
-            
-            const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-            const dayNames = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
-            
-            return `
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
-                    <h3 class="font-bold text-lg mb-4 text-center flex items-center justify-center gap-2">
-                        <span class="text-2xl">📅</span>
-                        ${monthNames[currentMonth]} ${currentYear}
-                    </h3>
-                    <div class="grid grid-cols-7 gap-1 mb-2">
-                        ${dayNames.map(day => `<div class="text-center text-xs font-semibold text-gray-500 py-1">${day}</div>`).join('')}
-                    </div>
-                    <div class="grid grid-cols-7 gap-1">
-                        ${calendarDays.map((day, idx) => {
-                            if (day === null) {
-                                return `<div class="h-10"></div>`;
-                            }
-                            return `
-                                <div class="text-center">
-                                    <div class="calendar-day inline-flex items-center justify-center w-9 h-9 rounded-full transition-all ${day.isToday ? 'bg-blue-500 text-white shadow-lg scale-110' : day.hasQuiz ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-700'}">
-                                        ${day.day}
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                    <div class="flex justify-center gap-4 mt-4 text-xs">
-                        <div class="flex items-center gap-1">
-                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            <span>Sınav</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                            <span>Bugün</span>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
-
-        const renderLevelProgress = () => {
-            const levelStats = getLevelStats();
-            const totalWords = state.words.filter(w => w.level !== 6).length;
-            
-            return `
-                <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
-                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
-                        <span class="text-2xl">📈</span>
-                        Seviye İlerlemesi
-                    </h3>
-                    <div class="space-y-4">
-                        ${[1, 2, 3, 4, 5].map(level => {
-                            const percent = totalWords > 0 ? (levelStats[level] / totalWords) * 100 : 0;
-                            const config = LEVEL_CONFIG[level];
-                            return `
-                                <div class="relative">
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <div class="flex items-center gap-2">
-                                            <span class="text-lg">${getLevelIcon(level)}</span>
-                                            <span class="font-medium">Seviye ${level}</span>
-                                            <span class="text-xs text-gray-500">${config.name}</span>
-                                        </div>
-                                        <span class="font-semibold text-${config.color.split('-')[1]}-600">${levelStats[level]}</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                                        <div class="${config.bg} h-3 rounded-full transition-all duration-700 ease-out" style="width: ${percent}%"></div>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                        ${levelStats[6] > 0 ? `
-                            <div class="relative">
-                                <div class="flex justify-between text-sm mb-1">
-                                    <div class="flex items-center gap-2">
-                                        <span class="text-lg">👑</span>
-                                        <span class="font-medium">Seviye 6</span>
-                                        <span class="text-xs text-purple-500">Ezberlendi</span>
-                                    </div>
-                                    <span class="font-semibold text-purple-600">${levelStats[6]}</span>
-                                </div>
-                                <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                                    <div class="bg-purple-500 h-3 rounded-full transition-all duration-700 ease-out" style="width: ${(levelStats[6] / Math.max(totalWords + levelStats[6], 1)) * 100}%"></div>
-                                </div>
-                            </div>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
+        const resetCardFields = () => {
+            state.cardFields = { ...DEFAULT_CARD_FIELDS };
+            saveToLocalStorage();
+            render();
         };
 
         // Render Functions
+        const renderWordCard = (word, isMastered = false) => {
+            return `<div class="word-card bg-white/90 backdrop-blur-sm rounded-2xl shadow-md overflow-hidden" onclick="window.openDetailModal(${JSON.stringify(word).replace(/"/g, '&quot;')})">
+                <div class="p-4"><div class="flex justify-between items-start"><div class="flex-1"><div class="flex items-center gap-2 flex-wrap"><div class="font-bold text-lg text-gray-800">${word.term}</div>${state.cardFields.showLevelBadge ? `<span class="px-2 py-0.5 rounded-full text-xs text-white ${getLevelColor(word.level)}">Lv${word.level}</span>` : ''}${isMastered ? '<span class="px-2 py-0.5 rounded-full text-xs text-white bg-purple-500">✓ Ezberlendi</span>' : ''}${state.cardFields.showSpeakButtons ? `<div class="flex gap-1"><button onclick="event.stopPropagation(); window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" class="speak-btn w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm">🔊</button><button onclick="event.stopPropagation(); window.speakText('${word.definition.replace(/'/g, "\\'")}', 'tr')" class="speak-btn w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm">🎤</button></div>` : ''}</div><div class="text-gray-600 text-sm mt-1">${word.definition}</div>${state.cardFields.showSynonyms && word.synonyms ? `<div class="text-xs text-green-600 mt-2">📖 Eş: ${word.synonyms}</div>` : ''}${state.cardFields.showAntonyms && word.antonyms ? `<div class="text-xs text-red-600">⚡ Zıt: ${word.antonyms}</div>` : ''}${state.cardFields.showExampleSentence && word.exampleSentence ? `<div class="text-xs text-blue-600 italic mt-2">💬 "${word.exampleSentence.substring(0, 60)}${word.exampleSentence.length > 60 ? '...' : ''}"</div>` : ''}<div class="flex items-center gap-3 mt-2">${state.cardFields.showKademe ? `<div class="flex items-center gap-1"><span class="text-xs text-gray-400">Kademe:</span><span class="text-xs font-medium">${word.kademe}/${LEVEL_CONFIG[word.level].requiredStreak}</span></div>` : ''}${state.cardFields.showKademe && state.cardFields.showNextReview ? `<div class="w-1 h-1 bg-gray-300 rounded-full"></div>` : ''}${state.cardFields.showNextReview ? `<div class="text-xs text-gray-400">📅 ${getNextReviewDate(word.nextReview)}</div>` : ''}</div></div><div class="flex gap-1"><button onclick="event.stopPropagation(); window.openEditModal(${JSON.stringify(word).replace(/"/g, '&quot;')})" class="w-8 h-8 rounded-full bg-gray-100 text-blue-500 flex items-center justify-center text-sm">✏️</button><button onclick="event.stopPropagation(); window.deleteWord('${word.id}')" class="w-8 h-8 rounded-full bg-gray-100 text-red-500 flex items-center justify-center text-sm">🗑️</button></div></div>${state.cardFields.showImage && word.image ? `<img src="${word.image}" class="mt-3 rounded-xl w-full h-32 object-cover" onerror="this.style.display='none'">` : ''}</div></div>`;
+        };
+
+        const renderCalendar = () => {
+            let today = new Date(), month = today.getMonth(), year = today.getFullYear();
+            let firstDay = new Date(year, month, 1), lastDay = new Date(year, month + 1, 0);
+            let startOffset = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
+            let days = [], quizDates = new Set(state.quizHistory);
+            for (let i = 0; i < startOffset; i++) days.push(null);
+            for (let d = 1; d <= lastDay.getDate(); d++) {
+                let date = new Date(year, month, d);
+                let has = quizDates.has(date.toDateString());
+                let isToday = date.toDateString() === today.toDateString();
+                days.push({ day: d, hasQuiz: has, isToday });
+            }
+            let monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+            let dayNames = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+            return `<div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5"><h3 class="font-bold text-lg mb-4 text-center flex items-center justify-center gap-2"><span class="text-2xl">📅</span>${monthNames[month]} ${year}</h3><div class="grid grid-cols-7 gap-1 mb-2">${dayNames.map(d => `<div class="text-center text-xs font-semibold text-gray-500 py-1">${d}</div>`).join('')}</div><div class="grid grid-cols-7 gap-1">${days.map(day => day === null ? '<div class="h-10"></div>' : `<div class="text-center"><div class="calendar-day inline-flex items-center justify-center w-9 h-9 rounded-full transition-all ${day.isToday ? 'bg-blue-500 text-white shadow-lg scale-110' : day.hasQuiz ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-700'}">${day.day}</div></div>`).join('')}</div><div class="flex justify-center gap-4 mt-4 text-xs"><div class="flex items-center gap-1"><div class="w-3 h-3 bg-green-500 rounded-full"></div><span>Sınav</span></div><div class="flex items-center gap-1"><div class="w-3 h-3 bg-blue-500 rounded-full"></div><span>Bugün</span></div></div></div>`;
+        };
+
+        const renderLevelProgress = () => {
+            let stats = getLevelStats(), total = state.words.filter(w => w.level !== 6).length;
+            return `<div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5"><h3 class="font-bold text-lg mb-4 flex items-center gap-2"><span class="text-2xl">📈</span>Seviye İlerlemesi</h3><div class="space-y-4">${[1, 2, 3, 4, 5].map(l => { let pct = total > 0 ? (stats[l] / total) * 100 : 0; return `<div><div class="flex justify-between text-sm mb-1"><div class="flex items-center gap-2"><span class="text-lg">${getLevelIcon(l)}</span><span class="font-medium">Seviye ${l}</span><span class="text-xs text-gray-500">${LEVEL_CONFIG[l].name}</span></div><span class="font-semibold text-${LEVEL_CONFIG[l].color.split('-')[1]}-600">${stats[l]}</span></div><div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden"><div class="${LEVEL_CONFIG[l].bg} h-3 rounded-full transition-all duration-700" style="width: ${pct}%"></div></div></div>`; }).join('')}${stats[6] > 0 ? `<div><div class="flex justify-between text-sm mb-1"><div class="flex items-center gap-2"><span class="text-lg">👑</span><span class="font-medium">Seviye 6</span><span class="text-xs text-purple-500">Ezberlendi</span></div><span class="font-semibold text-purple-600">${stats[6]}</span></div><div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden"><div class="bg-purple-500 h-3 rounded-full" style="width: ${(stats[6] / Math.max(total + stats[6], 1)) * 100}%"></div></div></div>` : ''}</div></div>`;
+        };
+
+        const renderCardFieldsSettings = () => `<div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5 mb-5"><div class="flex justify-between items-center mb-4"><div class="flex items-center gap-2"><span class="text-2xl">🎨</span><h3 class="font-bold text-gray-800">Kart Düzeni Özelleştirme</h3></div><button onclick="window.resetCardFields()" class="text-sm text-blue-500 px-3 py-1 rounded-lg bg-blue-50 hover:bg-blue-100">Varsayılana Dön</button></div><div class="grid grid-cols-2 gap-3">${CARD_FIELD_TYPES.map(f => `<label class="flex items-center justify-between p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100"><div class="flex items-center gap-2"><span class="text-lg">${f.icon}</span><span class="text-sm font-medium text-gray-700">${f.label}</span></div><div class="toggle-switch"><input type="checkbox" ${state.cardFields[f.id] ? 'checked' : ''} onchange="window.toggleCardField('${f.id}')"><span class="toggle-slider"></span></div></label>`).join('')}</div></div>`;
+
         const renderHomeTab = () => {
-            const dueCount = getDueWords().length;
-            const masteredWords = state.words.filter(w => w.level === 6).length;
-            const totalWords = state.words.length;
-            
-            return `
-                <div class="p-4 space-y-5 animate-slide-up pb-24">
-                    <!-- Streak and Points Card -->
-                    <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg p-5 text-white">
-                        <div class="flex justify-between items-center mb-3">
-                            <div class="flex items-center gap-2">
-                                <span class="text-3xl">${getStreakIcon()}</span>
-                                <span class="font-semibold">Çalışma Serisi</span>
-                            </div>
-                            <div class="text-right">
-                                <div class="text-xs opacity-80">Toplam Puan</div>
-                                <div class="text-2xl font-bold" id="points-display">${state.totalPoints}</div>
-                            </div>
-                        </div>
-                        <div class="flex items-baseline gap-2">
-                            <div class="text-4xl font-bold">${state.streakDays}</div>
-                            <div class="text-sm opacity-90">gün üst üste</div>
-                        </div>
-                        <div class="w-full bg-white/30 rounded-full h-2 mt-3">
-                            <div class="bg-white h-2 rounded-full transition-all duration-500" style="width: ${Math.min((state.streakDays / 30) * 100, 100)}%"></div>
-                        </div>
-                        <div class="text-xs opacity-80 mt-2">${state.streakDays >= 30 ? 'Mükemmel! 30 günü tamamladın! 🎉' : state.streakDays >= 7 ? 'Harika gidiyorsun! Devam et! 🔥' : 'Her gün çalışarak serini artır!'}</div>
-                    </div>
-                    
-                    <!-- Stats Cards -->
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg p-5 text-white">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-3xl">⏰</span>
-                                <span class="text-xs bg-white/20 px-2 py-1 rounded-full">Due</span>
-                            </div>
-                            <div class="text-4xl font-bold mb-1">${dueCount}</div>
-                            <div class="text-sm opacity-90">Bekleyen Kelime</div>
-                        </div>
-                        <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg p-5 text-white">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-3xl">👑</span>
-                                <span class="text-xs bg-white/20 px-2 py-1 rounded-full">Mastered</span>
-                            </div>
-                            <div class="text-4xl font-bold mb-1">${masteredWords}</div>
-                            <div class="text-sm opacity-90">Ezberlenen</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Progress Ring -->
-                    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-2">
-                                <span class="text-2xl">📊</span>
-                                <h3 class="font-bold text-gray-800">Genel İlerleme</h3>
-                            </div>
-                            <span class="text-sm text-gray-500">${totalWords} kelime</span>
-                        </div>
-                        <div class="flex items-center justify-center py-3">
-                            <div class="relative w-32 h-32">
-                                <svg class="w-32 h-32 transform -rotate-90">
-                                    <circle cx="64" cy="64" r="58" fill="none" stroke="#E5E7EB" stroke-width="8"/>
-                                    <circle class="progress-ring" cx="64" cy="64" r="58" fill="none" stroke="#3B82F6" stroke-width="8"
-                                        stroke-dasharray="${2 * Math.PI * 58}" stroke-dashoffset="${2 * Math.PI * 58 * (1 - masteredWords / Math.max(totalWords, 1))}"
-                                        stroke-linecap="round"/>
-                                </svg>
-                                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                    <span class="text-2xl font-bold text-blue-600">${Math.round((masteredWords / Math.max(totalWords, 1)) * 100)}%</span>
-                                    <span class="text-xs text-gray-500">tamamlandı</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    ${renderCalendar()}
-                    ${renderLevelProgress()}
-                    
-                    <!-- Quiz Button -->
-                    <button onclick="window.startQuiz()" 
-                        class="w-full py-5 rounded-2xl font-bold text-white text-lg transition-all transform active:scale-95 shadow-xl ${dueCount >= 5 ? 'bg-gradient-to-r from-blue-500 to-purple-600' : 'bg-gray-400 cursor-not-allowed'}"
-                        ${dueCount < 5 ? 'disabled' : ''}>
-                        <div class="flex items-center justify-center gap-2">
-                            <span class="text-2xl">🎯</span>
-                            <span>${dueCount >= 5 ? 'Sınavı Başlat' : `Sınav için ${5 - dueCount} kelime daha gerekli`}</span>
-                        </div>
-                        <div class="text-xs opacity-80 mt-1">${dueCount >= 5 ? 'Çoktan Seçmeli + Yazılı • Puan kazan!' : ''}</div>
-                    </button>
-                </div>
-            `;
+            let due = getDueWords().length, mastered = state.words.filter(w => w.level === 6).length, total = state.words.length;
+            return `<div class="p-4 space-y-5 animate-slide-up pb-24"><div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg p-5 text-white"><div class="flex justify-between items-center mb-3"><div class="flex items-center gap-2"><span class="text-3xl">${getStreakIcon()}</span><span class="font-semibold">Çalışma Serisi</span></div><div class="text-right"><div class="text-xs opacity-80">Toplam Puan</div><div class="text-2xl font-bold" id="points-display">${state.totalPoints}</div></div></div><div class="flex items-baseline gap-2"><div class="text-4xl font-bold">${state.streakDays}</div><div class="text-sm opacity-90">gün üst üste</div></div><div class="w-full bg-white/30 rounded-full h-2 mt-3"><div class="bg-white h-2 rounded-full transition-all duration-500" style="width: ${Math.min((state.streakDays / 30) * 100, 100)}%"></div></div><div class="text-xs opacity-80 mt-2">${state.streakDays >= 30 ? 'Mükemmel! 30 günü tamamladın! 🎉' : state.streakDays >= 7 ? 'Harika gidiyorsun! Devam et! 🔥' : 'Her gün çalışarak serini artır!'}</div></div><div class="grid grid-cols-2 gap-4"><div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg p-5 text-white"><div class="flex items-center justify-between mb-3"><span class="text-3xl">⏰</span><span class="text-xs bg-white/20 px-2 py-1 rounded-full">Due</span></div><div class="text-4xl font-bold mb-1">${due}</div><div class="text-sm opacity-90">Bekleyen Kelime</div></div><div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg p-5 text-white"><div class="flex items-center justify-between mb-3"><span class="text-3xl">👑</span><span class="text-xs bg-white/20 px-2 py-1 rounded-full">Mastered</span></div><div class="text-4xl font-bold mb-1">${mastered}</div><div class="text-sm opacity-90">Ezberlenen</div></div></div><div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5"><div class="flex items-center justify-between mb-4"><div class="flex items-center gap-2"><span class="text-2xl">📊</span><h3 class="font-bold text-gray-800">Genel İlerleme</h3></div><span class="text-sm text-gray-500">${total} kelime</span></div><div class="flex items-center justify-center py-3"><div class="relative w-32 h-32"><svg class="w-32 h-32 transform -rotate-90"><circle cx="64" cy="64" r="58" fill="none" stroke="#E5E7EB" stroke-width="8"/><circle class="progress-ring" cx="64" cy="64" r="58" fill="none" stroke="#3B82F6" stroke-width="8" stroke-dasharray="${2 * Math.PI * 58}" stroke-dashoffset="${2 * Math.PI * 58 * (1 - mastered / Math.max(total, 1))}" stroke-linecap="round"/></svg><div class="absolute inset-0 flex flex-col items-center justify-center"><span class="text-2xl font-bold text-blue-600">${Math.round((mastered / Math.max(total, 1)) * 100)}%</span><span class="text-xs text-gray-500">tamamlandı</span></div></div></div></div>${renderCalendar()}${renderLevelProgress()}<button onclick="window.startQuiz()" class="w-full py-5 rounded-2xl font-bold text-white text-lg transition-all transform active:scale-95 shadow-xl ${due >= 5 ? 'bg-gradient-to-r from-blue-500 to-purple-600' : 'bg-gray-400 cursor-not-allowed'}" ${due < 5 ? 'disabled' : ''}><div class="flex items-center justify-center gap-2"><span class="text-2xl">🎯</span><span>${due >= 5 ? 'Sınavı Başlat (3 Aşamalı)' : 'Sınav için ' + (5 - due) + ' kelime daha gerekli'}</span></div><div class="text-xs opacity-80 mt-1">Çoktan Seçmeli + Boşluk Doldurma + Yazılı</div></button></div>`;
         };
 
         const renderAddTab = () => {
             if (state.showAddForm) {
-                return `
-                    <div class="p-4 animate-slide-up pb-24">
-                        <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6">
-                            <div class="flex justify-between items-center mb-5">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-2xl">➕</span>
-                                    <h3 class="font-bold text-xl">Kelime Ekle</h3>
-                                </div>
-                                <button onclick="window.toggleAddForm(false)" class="text-gray-400 hover:text-gray-600 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Kelime *</label>
-                                    <input type="text" id="newTerm" placeholder="Örn: Apple" 
-                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Anlamı *</label>
-                                    <input type="text" id="newDefinition" placeholder="Örn: Elma" 
-                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Görsel URL</label>
-                                    <input type="text" id="newImage" placeholder="https://..." 
-                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Eş Anlamlılar</label>
-                                    <textarea id="newSynonyms" placeholder="Örn: Beautiful, Pretty" rows="2"
-                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"></textarea>
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Zıt Anlamlılar</label>
-                                    <input type="text" id="newAntonyms" placeholder="Örn: Ugly" 
-                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-1">Örnek Cümle</label>
-                                    <textarea id="newExample" placeholder="Örn: The weather is beautiful today." rows="2"
-                                        class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"></textarea>
-                                </div>
-                            </div>
-                            
-                            <button onclick="window.addWord()"
-                                class="w-full mt-6 bg-gradient-to-r from-green-500 to-blue-600 text-white py-4 rounded-xl font-bold text-lg transition-all hover:shadow-lg active:scale-95">
-                                💾 Kelimeyi Kaydet
-                            </button>
-                        </div>
-                    </div>
-                `;
+                return `<div class="p-4 animate-slide-up pb-24"><div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6"><div class="flex justify-between items-center mb-5"><div class="flex items-center gap-2"><span class="text-2xl">➕</span><h3 class="font-bold text-xl">Kelime Ekle</h3></div><button onclick="window.toggleAddForm(false)" class="text-gray-400 hover:text-gray-600 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button></div><div class="space-y-4"><input type="text" id="newTerm" placeholder="Kelime *" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"><input type="text" id="newDefinition" placeholder="Anlamı *" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"><input type="text" id="newImage" placeholder="Görsel URL" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"><textarea id="newSynonyms" placeholder="Eş Anlamlılar" rows="2" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea><input type="text" id="newAntonyms" placeholder="Zıt Anlamlılar" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"><textarea id="newExample" placeholder="Örnek Cümle (Boşluk doldurma sınavında kullanılacak)" rows="2" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea></div><button onclick="window.addWord()" class="w-full mt-6 bg-gradient-to-r from-green-500 to-blue-600 text-white py-4 rounded-xl font-bold text-lg transition-all hover:shadow-lg active:scale-95">💾 Kelimeyi Kaydet</button></div></div>`;
             }
-            
-            return `
-                <div class="p-4 animate-slide-up">
-                    <button onclick="window.toggleAddForm(true)"
-                        class="w-full bg-gradient-to-br from-blue-500 to-purple-600 text-white py-20 rounded-3xl shadow-xl transition-all active:scale-95">
-                        <div class="text-7xl mb-4">➕</div>
-                        <div class="text-2xl font-bold">Yeni Kelime Ekle</div>
-                        <div class="text-sm mt-2 opacity-80">Görsel, eş anlamlı, zıt anlamlı ve örnek cümle ekleyin</div>
-                    </button>
-                </div>
-            `;
+            return `<div class="p-4 animate-slide-up"><button onclick="window.toggleAddForm(true)" class="w-full bg-gradient-to-br from-blue-500 to-purple-600 text-white py-20 rounded-3xl shadow-xl transition-all active:scale-95"><div class="text-7xl mb-4">➕</div><div class="text-2xl font-bold">Yeni Kelime Ekle</div><div class="text-sm mt-2 opacity-80">Görsel, eş anlamlı, zıt anlamlı ve örnek cümle ekleyin</div></button></div>`;
         };
 
         const renderListTab = () => {
-            const filteredWords = getFilteredAndSortedWords();
-            const activeWords = filteredWords.filter(w => w.level !== 6);
-            const masteredWords = filteredWords.filter(w => w.level === 6);
-            const totalFiltered = filteredWords.length;
-            
-            const sortOptions = [
-                { value: 'newest', label: 'Yeniden Eskiye', icon: '🆕' },
-                { value: 'oldest', label: 'Eskiden Yeniye', icon: '📆' },
-                { value: 'levelAsc', label: 'Level (Küçükten Büyüğe)', icon: '📈' },
-                { value: 'levelDesc', label: 'Level (Büyükten Küçüğe)', icon: '📉' }
-            ];
-            
-            return `
-                <div class="p-4 pb-24 animate-slide-up">
-                    <div class="flex flex-col gap-4 mb-5">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h2 class="font-bold text-2xl text-gray-800">📋 Kelime Listem</h2>
-                                <p class="text-sm text-gray-500 mt-1">${state.words.filter(w => w.level !== 6).length} aktif, ${state.words.filter(w => w.level === 6).length} ezberlendi</p>
-                            </div>
-                            <div class="relative">
-                                <select id="sortSelect" onchange="window.changeSortType(this.value)" 
-                                    class="appearance-none bg-white/90 backdrop-blur-sm border-0 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md">
-                                    ${sortOptions.map(opt => `
-                                        <option value="${opt.value}" ${state.sortType === opt.value ? 'selected' : ''}>
-                                            ${opt.icon} ${opt.label}
-                                        </option>
-                                    `).join('')}
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                                    ▼
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Search Bar -->
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <span class="text-gray-400 text-lg">🔍</span>
-                            </div>
-                            <input type="text" id="searchInput" placeholder="Kelime veya anlam ara..." 
-                                value="${state.searchQuery.replace(/"/g, '&quot;')}"
-                                onkeyup="window.searchWords(this.value)"
-                                class="search-input w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border-0 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700">
-                            ${state.searchQuery ? `
-                                <button onclick="window.clearSearch()" 
-                                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600">
-                                    ✕
-                                </button>
-                            ` : ''}
-                        </div>
-                        
-                        <!-- Search Results Info -->
-                        ${state.searchQuery ? `
-                            <div class="text-sm text-gray-500 bg-white/50 rounded-xl px-3 py-2">
-                                "${state.searchQuery}" için ${totalFiltered} sonuç bulundu
-                            </div>
-                        ` : ''}
-                    </div>
-                    
-                    <div class="space-y-3">
-                        ${activeWords.length > 0 ? activeWords.map(word => renderWordCard(word)).join('') : ''}
-                        
-                        ${masteredWords.length > 0 ? `
-                            <div class="mt-6">
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span class="text-2xl">🏆</span>
-                                    <h3 class="font-bold text-xl text-gray-800">Ezberlenen Kelimeler</h3>
-                                    <span class="text-sm text-purple-500">${masteredWords.length}</span>
-                                </div>
-                                ${masteredWords.map(word => renderWordCard(word, true)).join('')}
-                            </div>
-                        ` : ''}
-                        
-                        ${totalFiltered === 0 && state.searchQuery ? `
-                            <div class="text-center py-16 bg-white/50 rounded-3xl">
-                                <div class="text-7xl mb-4">🔍</div>
-                                <p class="text-gray-500 mb-2">"${state.searchQuery}" için sonuç bulunamadı</p>
-                                <button onclick="window.clearSearch()" class="text-blue-500 underline text-sm">Aramayı temizle</button>
-                            </div>
-                        ` : ''}
-                        
-                        ${totalFiltered === 0 && !state.searchQuery ? `
-                            <div class="text-center py-16 bg-white/50 rounded-3xl">
-                                <div class="text-7xl mb-4">📭</div>
-                                <p class="text-gray-500 mb-4">Henüz kelime eklenmemiş</p>
-                                <button onclick="window.switchTab('add')" class="px-6 py-3 bg-blue-500 text-white rounded-xl font-semibold transition-all hover:bg-blue-600 active:scale-95">
-                                    ➕ Hemen kelime ekle
-                                </button>
-                            </div>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
+            let filtered = getFilteredAndSortedWords();
+            let active = filtered.filter(w => w.level !== 6), mastered = filtered.filter(w => w.level === 6);
+            return `<div class="p-4 pb-24 animate-slide-up"><div class="flex flex-col gap-4 mb-5"><div class="flex justify-between items-center"><div><h2 class="font-bold text-2xl text-gray-800">📋 Kelime Listem</h2><p class="text-sm text-gray-500 mt-1">${state.words.filter(w => w.level !== 6).length} aktif, ${state.words.filter(w => w.level === 6).length} ezberlendi</p></div><div class="relative"><select id="sortSelect" onchange="window.changeSortType(this.value)" class="appearance-none bg-white/90 backdrop-blur-sm border-0 rounded-xl px-4 py-2 pr-8 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-md"><option value="newest" ${state.sortType === 'newest' ? 'selected' : ''}>🆕 Yeniden Eskiye</option><option value="oldest" ${state.sortType === 'oldest' ? 'selected' : ''}>📆 Eskiden Yeniye</option><option value="levelAsc" ${state.sortType === 'levelAsc' ? 'selected' : ''}>📈 Level (Küçükten Büyüğe)</option><option value="levelDesc" ${state.sortType === 'levelDesc' ? 'selected' : ''}>📉 Level (Büyükten Küçüğe)</option></select><div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">▼</div></div></div><div class="relative"><span class="absolute left-3 top-3 text-gray-400 text-lg">🔍</span><input type="text" id="searchInput" placeholder="Kelime veya anlam ara..." value="${state.searchQuery.replace(/"/g, '&quot;')}" onkeyup="window.searchWords(this.value)" class="search-input w-full pl-10 pr-4 py-3 bg-white/90 backdrop-blur-sm border-0 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"><button onclick="window.clearSearch()" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600 ${!state.searchQuery ? 'hidden' : ''}">✕</button></div>${state.searchQuery ? `<div class="text-sm text-gray-500 bg-white/50 rounded-xl px-3 py-2">"${state.searchQuery}" için ${filtered.length} sonuç bulundu</div>` : ''}</div><div class="space-y-3">${active.length > 0 ? active.map(w => renderWordCard(w)).join('') : ''}${mastered.length > 0 ? `<div class="mt-6"><div class="flex items-center gap-2 mb-3"><span class="text-2xl">🏆</span><h3 class="font-bold text-xl text-gray-800">Ezberlenen Kelimeler</h3><span class="text-sm text-purple-500">${mastered.length}</span></div>${mastered.map(w => renderWordCard(w, true)).join('')}</div>` : ''}${filtered.length === 0 && state.searchQuery ? `<div class="text-center py-16 bg-white/50 rounded-3xl"><div class="text-7xl mb-4">🔍</div><p class="text-gray-500 mb-2">"${state.searchQuery}" için sonuç bulunamadı</p><button onclick="window.clearSearch()" class="text-blue-500 underline text-sm">Aramayı temizle</button></div>` : filtered.length === 0 && !state.searchQuery ? `<div class="text-center py-16 bg-white/50 rounded-3xl"><div class="text-7xl mb-4">📭</div><p class="text-gray-500 mb-4">Henüz kelime eklenmemiş</p><button onclick="window.switchTab('add')" class="px-6 py-3 bg-blue-500 text-white rounded-xl font-semibold transition-all hover:bg-blue-600 active:scale-95">➕ Hemen kelime ekle</button></div>` : ''}</div></div>`;
         };
 
-        const renderSettingsTab = () => {
-            return `
-                <div class="p-4 space-y-5 pb-24 animate-slide-up">
-                    <!-- Theme Selection -->
-                    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
-                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
-                            <span class="text-2xl">🎨</span>
-                            Tema Seçimi
-                        </h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <button onclick="window.setTheme('light')" 
-                                class="p-5 rounded-xl transition-all ${state.theme === 'light' ? 'ring-2 ring-blue-500 shadow-lg bg-gradient-to-br from-gray-50 to-gray-100' : 'bg-gray-100'}">
-                                <div class="text-4xl mb-2">🌞</div>
-                                <div class="text-sm font-semibold">Açık Tema</div>
-                                <div class="text-xs text-gray-500 mt-1">Aydınlık ve ferah</div>
-                            </button>
-                            <button onclick="window.setTheme('dark')" 
-                                class="p-5 rounded-xl transition-all ${state.theme === 'dark' ? 'ring-2 ring-blue-500 shadow-lg bg-gradient-to-br from-gray-800 to-gray-900 text-white' : 'bg-gray-800 text-white'}">
-                                <div class="text-4xl mb-2">🌙</div>
-                                <div class="text-sm font-semibold">Koyu Tema</div>
-                                <div class="text-xs text-gray-300 mt-1">Göz yormayan</div>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Card Layout Settings -->
-                    ${renderCardFieldsSettings()}
-                    
-                    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
-                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
-                            <span class="text-2xl">⏰</span>
-                            Sınav Saat Aralığı
-                        </h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Başlangıç Saati (0-23)</label>
-                                <input type="number" id="startHour" min="0" max="23" value="${state.quizStartHour}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Bitiş Saati (0-23)</label>
-                                <input type="number" id="endHour" min="0" max="23" value="${state.quizEndHour}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            </div>
-                            <button onclick="window.saveQuizHours()"
-                                class="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold transition-all hover:bg-blue-600 active:scale-95">
-                                💾 Saatleri Kaydet
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
-                        <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
-                            <span class="text-2xl">💾</span>
-                            Yedekleme
-                        </h3>
-                        <div class="space-y-3">
-                            <button onclick="window.exportData()"
-                                class="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all hover:bg-blue-600 active:scale-95">
-                                📥 Yedek Al
-                            </button>
-                            <label class="w-full bg-green-500 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 cursor-pointer transition-all hover:bg-green-600 active:scale-95">
-                                📤 Yedekten Yükle
-                                <input type="file" accept=".json" onchange="window.importData(this)" class="hidden">
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5">
-                        <h3 class="font-bold text-lg mb-3 flex items-center gap-2">
-                            <span class="text-2xl">ℹ️</span>
-                            Hakkında
-                        </h3>
-                        <div class="text-sm text-gray-600">
-                            <p>SRS (Aralıklı Tekrar Sistemi) tabanlı kelime ezberleme uygulaması</p>
-                            <div class="mt-3 p-3 bg-gray-50 rounded-xl">
-                                <p class="font-semibold text-gray-700 mb-2">✨ Özellikler:</p>
-                                <ul class="list-none space-y-1 text-xs">
-                                    <li>• 🔘 4 şıklı çoktan seçmeli sınav</li>
-                                    <li>• ✍️ Yazılı sınav modu</li>
-                                    <li>• 🔊 Seslendirme desteği</li>
-                                    <li>• ✏️ Kelime düzenleme</li>
-                                    <li>• 📅 Sınav takvimi</li>
-                                    <li>• 📊 Gelişmiş istatistikler</li>
-                                    <li>• 🔥 Günlük çalışma serisi</li>
-                                    <li>• 🎯 Puan sistemi</li>
-                                    <li>• 🎨 Özelleştirilebilir kart düzeni</li>
-                                    <li>• 🔍 Kelime arama</li>
-                                </ul>
-                            </div>
-                            <p class="mt-3">Toplam kelime: ${state.words.length}</p>
-                            <p class="text-xs text-gray-400 mt-2">v6.0.0</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
-
-        const renderEditModal = () => {
-            if (!state.showEditModal || !state.editingWord) return '';
-            
-            return `
-                <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeEditModal(event)">
-                    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-screen overflow-y-auto animate-scale-in" onclick="event.stopPropagation()">
-                        <div class="sticky top-0 bg-white border-b border-gray-100 p-5 rounded-t-2xl">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center gap-2">
-                                    <span class="text-2xl">✏️</span>
-                                    <h3 class="font-bold text-xl">Kelime Düzenle</h3>
-                                </div>
-                                <button onclick="window.closeEditModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
-                            </div>
-                        </div>
-                        <div class="p-5 space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Kelime</label>
-                                <input type="text" id="editTerm" placeholder="Kelime" value="${(state.editingWord.term || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Anlamı</label>
-                                <input type="text" id="editDefinition" placeholder="Anlamı" value="${(state.editingWord.definition || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Görsel URL</label>
-                                <input type="text" id="editImage" placeholder="https://..." value="${(state.editingWord.image || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Eş Anlamlılar</label>
-                                <textarea id="editSynonyms" placeholder="Eş anlamlılar" rows="2"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">${state.editingWord.synonyms || ''}</textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Zıt Anlamlılar</label>
-                                <input type="text" id="editAntonyms" placeholder="Zıt anlamlılar" value="${(state.editingWord.antonyms || '').replace(/"/g, '&quot;')}"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Örnek Cümle</label>
-                                <textarea id="editExample" placeholder="Örnek cümle" rows="2"
-                                    class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">${state.editingWord.exampleSentence || ''}</textarea>
-                            </div>
-                        </div>
-                        <div class="sticky bottom-0 bg-white border-t border-gray-100 p-5 rounded-b-2xl flex gap-3">
-                            <button onclick="window.saveEdit()"
-                                class="flex-1 bg-gradient-to-r from-green-500 to-blue-600 text-white py-3 rounded-xl font-semibold transition-all hover:shadow-lg active:scale-95">
-                                💾 Kaydet
-                            </button>
-                            <button onclick="window.closeEditModal()"
-                                class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold transition-all hover:bg-gray-200 active:scale-95">
-                                İptal
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
-
-        const renderDetailModal = () => {
-            if (!state.showDetailModal || !state.detailWord) return '';
-            
-            const word = state.detailWord;
-            const config = LEVEL_CONFIG[word.level];
-            
-            return `
-                <div class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeDetailModal(event)">
-                    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto animate-scale-in" onclick="event.stopPropagation()">
-                        <div class="sticky top-0 bg-white rounded-t-3xl p-5 border-b border-gray-100">
-                            <div class="flex justify-between items-start">
-                                <div class="flex-1">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-3xl">${getLevelIcon(word.level)}</span>
-                                        <span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${config.bg}">Seviye ${word.level} • ${config.name}</span>
-                                    </div>
-                                    <div class="flex items-center gap-2 mt-2">
-                                        <h2 class="text-3xl font-bold text-gray-800">${word.term}</h2>
-                                        <button onclick="window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" 
-                                            class="speak-btn w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl transition-all hover:bg-blue-200 active:scale-90">
-                                            🔊
-                                        </button>
-                                    </div>
-                                </div>
-                                <button onclick="window.closeDetailModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button>
-                            </div>
-                        </div>
-                        
-                        <div class="p-5 space-y-5">
-                            ${state.cardFields.showImage && word.image ? `
-                                <div class="rounded-2xl overflow-hidden bg-gray-100">
-                                    <img src="${word.image}" alt="${word.term}" class="w-full h-64 object-cover">
-                                </div>
-                            ` : `
-                                <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 p-8 text-center">
-                                    <span class="text-6xl">📖</span>
-                                    <p class="text-gray-500 mt-2">Görsel eklenmemiş</p>
-                                </div>
-                            `}
-                            
-                            <div class="bg-gray-50 rounded-2xl p-5">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-xl">📝</span>
-                                    <h3 class="font-semibold text-gray-700">Anlamı</h3>
-                                </div>
-                                <p class="text-gray-800 text-lg">${word.definition}</p>
-                            </div>
-                            
-                            ${state.cardFields.showSynonyms && word.synonyms ? `
-                                <div class="bg-green-50 rounded-2xl p-5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-xl">📖</span>
-                                        <h3 class="font-semibold text-green-700">Eş Anlamlılar</h3>
-                                    </div>
-                                    <p class="text-green-800">${word.synonyms}</p>
-                                </div>
-                            ` : ''}
-                            
-                            ${state.cardFields.showAntonyms && word.antonyms ? `
-                                <div class="bg-red-50 rounded-2xl p-5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-xl">⚡</span>
-                                        <h3 class="font-semibold text-red-700">Zıt Anlamlılar</h3>
-                                    </div>
-                                    <p class="text-red-800">${word.antonyms}</p>
-                                </div>
-                            ` : ''}
-                            
-                            ${state.cardFields.showExampleSentence && word.exampleSentence ? `
-                                <div class="bg-blue-50 rounded-2xl p-5">
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <span class="text-xl">💬</span>
-                                        <h3 class="font-semibold text-blue-700">Örnek Cümle</h3>
-                                    </div>
-                                    <p class="text-blue-800 italic">"${word.exampleSentence}"</p>
-                                    <button onclick="window.speakText('${word.exampleSentence.replace(/'/g, "\\'")}', 'en')" 
-                                        class="mt-3 text-sm text-blue-600 flex items-center gap-1 hover:underline">
-                                        🔊 Cümleyi dinle
-                                    </button>
-                                </div>
-                            ` : ''}
-                            
-                            <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                                <div class="text-sm text-gray-500">
-                                    ${state.cardFields.showKademe ? `<div>Kademe: ${word.kademe}/${config.requiredStreak}</div>` : ''}
-                                    ${state.cardFields.showNextReview ? `<div>Sonraki tekrar: ${getNextReviewDate(word.nextReview)}</div>` : ''}
-                                </div>
-                                <div class="flex gap-2">
-                                    <button onclick="window.openEditModalFromDetail()" 
-                                        class="px-4 py-2 bg-blue-500 text-white rounded-xl text-sm font-semibold transition-all hover:bg-blue-600 active:scale-95">
-                                        ✏️ Düzenle
-                                    </button>
-                                    <button onclick="window.deleteWordFromDetail()" 
-                                        class="px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-semibold transition-all hover:bg-red-600 active:scale-95">
-                                        🗑️ Sil
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
+        const renderSettingsTab = () => `<div class="p-4 space-y-5 pb-24 animate-slide-up"><div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5"><h3 class="font-bold text-lg mb-4 flex items-center gap-2"><span class="text-2xl">🎨</span>Tema Seçimi</h3><div class="grid grid-cols-2 gap-4"><button onclick="window.setTheme('light')" class="p-5 rounded-xl transition-all ${state.theme === 'light' ? 'ring-2 ring-blue-500 shadow-lg bg-gradient-to-br from-gray-50 to-gray-100' : 'bg-gray-100'}"><div class="text-4xl mb-2">🌞</div><div class="text-sm font-semibold">Açık Tema</div><div class="text-xs text-gray-500 mt-1">Aydınlık ve ferah</div></button><button onclick="window.setTheme('dark')" class="p-5 rounded-xl transition-all ${state.theme === 'dark' ? 'ring-2 ring-blue-500 shadow-lg bg-gradient-to-br from-gray-800 to-gray-900 text-white' : 'bg-gray-800 text-white'}"><div class="text-4xl mb-2">🌙</div><div class="text-sm font-semibold">Koyu Tema</div><div class="text-xs text-gray-300 mt-1">Göz yormayan</div></button></div></div>${renderCardFieldsSettings()}<div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5"><h3 class="font-bold text-lg mb-4 flex items-center gap-2"><span class="text-2xl">⏰</span>Sınav Saat Aralığı</h3><div class="space-y-4"><div><label class="block text-sm font-medium text-gray-700 mb-2">Başlangıç Saati (0-23)</label><input type="number" id="startHour" min="0" max="23" value="${state.quizStartHour}" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"></div><div><label class="block text-sm font-medium text-gray-700 mb-2">Bitiş Saati (0-23)</label><input type="number" id="endHour" min="0" max="23" value="${state.quizEndHour}" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"></div><button onclick="window.saveQuizHours()" class="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold transition-all hover:bg-blue-600 active:scale-95">💾 Saatleri Kaydet</button></div></div><div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5"><h3 class="font-bold text-lg mb-4 flex items-center gap-2"><span class="text-2xl">💾</span>Yedekleme</h3><div class="space-y-3"><button onclick="window.exportData()" class="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all hover:bg-blue-600 active:scale-95">📥 Yedek Al</button><label class="w-full bg-green-500 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 cursor-pointer transition-all hover:bg-green-600 active:scale-95">📤 Yedekten Yükle<input type="file" accept=".json" onchange="window.importData(this)" class="hidden"></label></div></div><div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-5"><h3 class="font-bold text-lg mb-3 flex items-center gap-2"><span class="text-2xl">ℹ️</span>Hakkında</h3><div class="text-sm text-gray-600"><p>SRS (Aralıklı Tekrar Sistemi) tabanlı kelime ezberleme uygulaması</p><div class="mt-3 p-3 bg-gray-50 rounded-xl"><p class="font-semibold text-gray-700 mb-2">✨ Özellikler:</p><ul class="list-none space-y-1 text-xs"><li>• 🔘 4 şıklı çoktan seçmeli</li><li>• 📝 Boşluk doldurma (cümle içinde)</li><li>• ✍️ Yazılı sınav</li><li>• 🔊 Seslendirme</li><li>• 🎨 Özelleştirilebilir kart düzeni</li><li>• 🔍 Arama</li><li>• 🔥 Günlük seri ve puan sistemi</li></ul></div><p class="mt-2">Toplam kelime: ${state.words.length}</p><p class="text-xs text-gray-400 mt-2">v7.0.0</p></div></div></div>`;
 
         const renderQuiz = () => {
             if (!state.currentQuestion) return '<div class="flex items-center justify-center h-screen">Yükleniyor...</div>';
+            let progress = ((state.quizIndex + 1) / state.quizWords.length) * 100;
+            let typeNames = { 'multiple-choice': 'Çoktan Seçmeli', 'cloze': 'Boşluk Doldurma', 'writing': 'Yazılı' };
+            let typeIcons = { 'multiple-choice': '🔘', 'cloze': '📝', 'writing': '✍️' };
+            let q = state.currentQuestion;
             
-            const progress = ((state.quizIndex + 1) / state.quizWords.length) * 100;
-            const quizTypeName = state.quizType === 'multiple-choice' ? 'Çoktan Seçmeli' : 'Yazılı';
-            const quizIcon = state.quizType === 'multiple-choice' ? '🔘' : '✍️';
-            
-            if (state.quizType === 'multiple-choice') {
-                const q = state.currentQuestion;
-                return `
-                    <div class="min-h-screen ${state.theme === 'dark' ? 'dark-theme' : ''}">
-                        <div class="container mx-auto max-w-md min-h-screen flex flex-col">
-                            <div class="bg-white/10 backdrop-blur-lg sticky top-0 z-10 p-4">
-                                <div class="flex justify-between items-center mb-3">
-                                    <button onclick="window.finishQuiz()" class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">✕ Çıkış</button>
-                                    <div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${quizIcon} ${quizTypeName}</div>
-                                    <div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${state.quizIndex + 1}/${state.quizWords.length}</div>
-                                </div>
-                                <div class="w-full bg-white/30 rounded-full h-2">
-                                    <div class="bg-white h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="flex-1 flex items-center justify-center p-5">
-                                <div class="w-full">
-                                    <div class="bg-white rounded-3xl shadow-2xl p-6 mb-5 text-center">
-                                        ${q.word.image ? `<img src="${q.word.image}" alt="${q.word.term}" class="w-28 h-28 object-cover rounded-2xl mx-auto mb-4 shadow-md" onerror="this.style.display='none'">` : ''}
-                                        <div class="flex items-center justify-center gap-2 mb-2">
-                                            <span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${getLevelColor(q.word.level)}">Seviye ${q.word.level}</span>
-                                            <span class="text-xs text-gray-500">Kademe ${q.word.kademe}/${LEVEL_CONFIG[q.word.level].requiredStreak}</span>
-                                            <button onclick="window.speakText('${q.word.term.replace(/'/g, "\\'")}', 'en')" 
-                                                class="speak-btn w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm">
-                                                🔊
-                                            </button>
-                                        </div>
-                                        <div class="text-5xl font-bold text-gray-800 my-6 break-words">
-                                            ${q.word.term}
-                                        </div>
-                                        <div class="text-sm text-gray-400">
-                                            Doğru anlamı nedir?
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="grid grid-cols-1 gap-3">
-                                        ${q.options.map(option => `
-                                            <button onclick="window.handleMultipleChoiceAnswer('${option.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')" 
-                                                class="p-4 rounded-xl text-left font-medium transition-all transform active:scale-98 ${state.feedback ? 
-                                                    (option === q.correctAnswer ? 'bg-green-500 text-white shadow-lg' : 
-                                                     (state.feedback.isCorrect === false && option !== q.correctAnswer ? 'bg-red-500 text-white shadow-lg' : 'bg-gray-100 text-gray-400')) 
-                                                    : 'bg-white shadow-md hover:shadow-lg text-gray-700 border border-gray-100'}"
-                                                ${state.feedback ? 'disabled' : ''}>
-                                                ${option}
-                                            </button>
-                                        `).join('')}
-                                    </div>
-                                    
-                                    ${state.feedback ? `
-                                        <div class="mt-5 p-4 rounded-xl text-center font-bold animate-fade-in ${state.feedback.isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
-                                            ${state.feedback.isCorrect ? '✓ Doğru Cevap! +10 puan' : `✗ Yanlış Cevap! Doğrusu: ${state.feedback.correctAnswer}`}
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
+            if (q.type === 'multiple-choice') {
+                return `<div class="min-h-screen ${state.theme === 'dark' ? 'dark-theme' : ''}"><div class="container mx-auto max-w-md min-h-screen flex flex-col"><div class="bg-white/10 backdrop-blur-lg sticky top-0 z-10 p-4"><div class="flex justify-between items-center mb-3"><button onclick="window.finishQuiz()" class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">✕ Çıkış</button><div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${typeIcons[q.type]} ${typeNames[q.type]}</div><div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${state.quizIndex + 1}/${state.quizWords.length}</div></div><div class="w-full bg-white/30 rounded-full h-2"><div class="bg-white h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div></div></div><div class="flex-1 flex items-center justify-center p-5"><div class="w-full"><div class="bg-white rounded-3xl shadow-2xl p-6 mb-5 text-center">${q.word.image ? `<img src="${q.word.image}" class="w-28 h-28 object-cover rounded-2xl mx-auto mb-4 shadow-md">` : ''}<div class="flex items-center justify-center gap-2 mb-2"><span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${getLevelColor(q.word.level)}">Seviye ${q.word.level}</span><span class="text-xs text-gray-500">Kademe ${q.word.kademe}/${LEVEL_CONFIG[q.word.level].requiredStreak}</span><button onclick="window.speakText('${q.word.term.replace(/'/g, "\\'")}', 'en')" class="speak-btn w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm">🔊</button></div><div class="text-5xl font-bold text-gray-800 my-6 break-words">${q.word.term}</div><div class="text-sm text-gray-400">Doğru anlamı nedir?</div></div><div class="grid grid-cols-1 gap-3">${q.options.map(opt => `<button onclick="window.handleMultipleChoiceAnswer('${opt.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')" class="p-4 rounded-xl text-left font-medium transition-all transform active:scale-98 ${state.feedback ? (opt === q.correctAnswer ? 'bg-green-500 text-white shadow-lg' : (state.feedback.isCorrect === false && opt !== q.correctAnswer ? 'bg-red-500 text-white shadow-lg' : 'bg-gray-100 text-gray-400')) : 'bg-white shadow-md hover:shadow-lg text-gray-700 border border-gray-100'}">${opt}</button>`).join('')}</div>${state.feedback ? `<div class="mt-5 p-4 rounded-xl text-center font-bold animate-fade-in ${state.feedback.isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">${state.feedback.isCorrect ? '✓ Doğru Cevap! +10 puan' : `✗ Yanlış Cevap! Doğrusu: ${state.feedback.correctAnswer}`}</div>` : ''}</div></div></div></div>`;
+            } else if (q.type === 'cloze') {
+                return `<div class="min-h-screen ${state.theme === 'dark' ? 'dark-theme' : ''}"><div class="container mx-auto max-w-md min-h-screen flex flex-col"><div class="bg-white/10 backdrop-blur-lg sticky top-0 z-10 p-4"><div class="flex justify-between items-center mb-3"><button onclick="window.finishQuiz()" class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">✕ Çıkış</button><div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${typeIcons[q.type]} ${typeNames[q.type]}</div><div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${state.quizIndex + 1}/${state.quizWords.length}</div></div><div class="w-full bg-white/30 rounded-full h-2"><div class="bg-white h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div></div></div><div class="flex-1 flex items-center justify-center p-5"><div class="w-full"><div class="bg-white rounded-3xl shadow-2xl p-6 mb-5 text-center">${q.word.image ? `<img src="${q.word.image}" class="w-28 h-28 object-cover rounded-2xl mx-auto mb-4 shadow-md">` : ''}<div class="flex items-center justify-center gap-2 mb-2"><span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${getLevelColor(q.word.level)}">Seviye ${q.word.level}</span><span class="text-xs text-gray-500">Kademe ${q.word.kademe}/${LEVEL_CONFIG[q.word.level].requiredStreak}</span><button onclick="window.speakText('${q.word.term.replace(/'/g, "\\'")}', 'en')" class="speak-btn w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm">🔊</button></div><div class="text-lg text-gray-700 mb-4">Aşağıdaki cümlede boşluğa hangi kelime gelmelidir?</div><div class="text-xl font-semibold text-gray-800 bg-gray-50 p-4 rounded-xl italic">“${q.clozeSentence}”</div></div><div class="grid grid-cols-1 gap-3">${q.options.map(opt => `<button onclick="window.handleClozeAnswer('${opt.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')" class="p-4 rounded-xl text-left font-medium transition-all transform active:scale-98 ${state.feedback ? (opt === q.correctAnswer ? 'bg-green-500 text-white shadow-lg' : (state.feedback.isCorrect === false && opt !== q.correctAnswer ? 'bg-red-500 text-white shadow-lg' : 'bg-gray-100 text-gray-400')) : 'bg-white shadow-md hover:shadow-lg text-gray-700 border border-gray-100'}">${opt}</button>`).join('')}</div>${state.feedback ? `<div class="mt-5 p-4 rounded-xl text-center font-bold animate-fade-in ${state.feedback.isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">${state.feedback.isCorrect ? '✓ Doğru Cevap! +10 puan' : `✗ Yanlış Cevap! Doğrusu: ${state.feedback.correctAnswer}`}</div>` : ''}</div></div></div></div>`;
             } else {
-                const q = state.currentQuestion;
-                return `
-                    <div class="min-h-screen ${state.theme === 'dark' ? 'dark-theme' : ''}">
-                        <div class="container mx-auto max-w-md min-h-screen flex flex-col">
-                            <div class="bg-white/10 backdrop-blur-lg sticky top-0 z-10 p-4">
-                                <div class="flex justify-between items-center mb-3">
-                                    <button onclick="window.finishQuiz()" class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">✕ Çıkış</button>
-                                    <div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${quizIcon} ${quizTypeName}</div>
-                                    <div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${state.quizIndex + 1}/${state.quizWords.length}</div>
-                                </div>
-                                <div class="w-full bg-white/30 rounded-full h-2">
-                                    <div class="bg-white h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="flex-1 flex items-center justify-center p-5">
-                                <div class="w-full">
-                                    <div class="bg-white rounded-3xl shadow-2xl p-6 mb-5 text-center">
-                                        ${q.word.image ? `<img src="${q.word.image}" alt="${q.word.term}" class="w-28 h-28 object-cover rounded-2xl mx-auto mb-4 shadow-md" onerror="this.style.display='none'">` : ''}
-                                        <div class="flex items-center justify-center gap-2 mb-2">
-                                            <span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${getLevelColor(q.word.level)}">Seviye ${q.word.level}</span>
-                                            <span class="text-xs text-gray-500">Kademe ${q.word.kademe}/${LEVEL_CONFIG[q.word.level].requiredStreak}</span>
-                                        </div>
-                                        <div class="text-2xl font-semibold text-gray-700 mb-2">
-                                            Anlamı:
-                                        </div>
-                                        <div class="text-3xl font-bold text-gray-800 mb-6">
-                                            ${q.word.definition}
-                                        </div>
-                                        <div class="text-sm text-gray-400 mb-4">
-                                            Kelimenin İngilizcesini yazın
-                                        </div>
-                                        <input type="text" id="writingAnswer" placeholder="Cevabınızı yazın..." 
-                                            value="${state.writingAnswer.replace(/"/g, '&quot;')}"
-                                            class="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-lg font-medium"
-                                            onkeypress="if(event.key === 'Enter') window.handleWritingAnswer()">
-                                    </div>
-                                    
-                                    <button onclick="window.handleWritingAnswer()" 
-                                        class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-lg transition-all active:scale-95 shadow-lg">
-                                        Cevapla
-                                    </button>
-                                    
-                                    ${state.feedback ? `
-                                        <div class="mt-5 p-4 rounded-xl text-center font-bold animate-fade-in ${state.feedback.isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
-                                            ${state.feedback.isCorrect ? '✓ Doğru Cevap! +10 puan' : `✗ Yanlış Cevap! Doğrusu: ${state.feedback.correctAnswer}`}
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                return `<div class="min-h-screen ${state.theme === 'dark' ? 'dark-theme' : ''}"><div class="container mx-auto max-w-md min-h-screen flex flex-col"><div class="bg-white/10 backdrop-blur-lg sticky top-0 z-10 p-4"><div class="flex justify-between items-center mb-3"><button onclick="window.finishQuiz()" class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">✕ Çıkış</button><div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${typeIcons[q.type]} ${typeNames[q.type]}</div><div class="text-white font-semibold text-sm bg-white/20 px-4 py-2 rounded-full">${state.quizIndex + 1}/${state.quizWords.length}</div></div><div class="w-full bg-white/30 rounded-full h-2"><div class="bg-white h-2 rounded-full transition-all duration-300" style="width: ${progress}%"></div></div></div><div class="flex-1 flex items-center justify-center p-5"><div class="w-full"><div class="bg-white rounded-3xl shadow-2xl p-6 mb-5 text-center">${q.word.image ? `<img src="${q.word.image}" class="w-28 h-28 object-cover rounded-2xl mx-auto mb-4 shadow-md">` : ''}<div class="flex items-center justify-center gap-2 mb-2"><span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${getLevelColor(q.word.level)}">Seviye ${q.word.level}</span><span class="text-xs text-gray-500">Kademe ${q.word.kademe}/${LEVEL_CONFIG[q.word.level].requiredStreak}</span></div><div class="text-2xl font-semibold text-gray-700 mb-2">Anlamı:</div><div class="text-3xl font-bold text-gray-800 mb-6">${q.word.definition}</div><div class="text-sm text-gray-400 mb-4">Kelimenin İngilizcesini yazın</div><input type="text" id="writingAnswer" placeholder="Cevabınızı yazın..." value="${state.writingAnswer.replace(/"/g, '&quot;')}" class="w-full px-5 py-4 border-2 border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-lg font-medium" onkeypress="if(event.key === 'Enter') window.handleWritingAnswer()"></div><button onclick="window.handleWritingAnswer()" class="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-lg transition-all active:scale-95 shadow-lg">Cevapla</button>${state.feedback ? `<div class="mt-5 p-4 rounded-xl text-center font-bold animate-fade-in ${state.feedback.isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">${state.feedback.isCorrect ? '✓ Doğru Cevap! +10 puan' : `✗ Yanlış Cevap! Doğrusu: ${state.feedback.correctAnswer}`}</div>` : ''}</div></div></div></div>`;
             }
         };
 
         const renderMain = () => {
-            if (state.showQuiz) {
-                return renderQuiz();
-            }
-            
+            if (state.showQuiz) return renderQuiz();
             let content = '';
-            switch(state.activeTab) {
-                case 'home': content = renderHomeTab(); break;
-                case 'add': content = renderAddTab(); break;
-                case 'list': content = renderListTab(); break;
-                case 'settings': content = renderSettingsTab(); break;
-                default: content = renderHomeTab();
-            }
-            
-            const themeClass = state.theme === 'dark' ? 'dark-theme' : '';
-            const bgGradient = state.theme === 'dark' ? '' : 'bg-gradient-to-br from-gray-50 to-gray-100';
-            
-            return `
-                <div class="min-h-screen ${bgGradient} ${themeClass} pb-16">
-                    <div class="container mx-auto max-w-md">
-                        ${content}
-                    </div>
-                    
-                    <nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg shadow-2xl border-t border-gray-100 pb-safe ${state.theme === 'dark' ? 'dark-theme' : ''}">
-                        <div class="container mx-auto max-w-md">
-                            <div class="flex justify-around py-2">
-                                ${[
-                                    { id: 'home', icon: '🏠', label: 'Ana Sayfa' },
-                                    { id: 'add', icon: '➕', label: 'Ekle' },
-                                    { id: 'list', icon: '📋', label: 'Listem' },
-                                    { id: 'settings', icon: '⚙️', label: 'Ayarlar' }
-                                ].map(tab => `
-                                    <button onclick="window.switchTab('${tab.id}')" 
-                                        class="flex flex-col items-center py-2 px-5 rounded-2xl transition-all ${state.activeTab === tab.id ? 'text-blue-600 bg-blue-50' : 'text-gray-500'}">
-                                        <div class="text-2xl">${tab.icon}</div>
-                                        <span class="text-xs mt-1 font-medium">${tab.label}</span>
-                                    </button>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </nav>
-                </div>
-            `;
+            if (state.activeTab === 'home') content = renderHomeTab();
+            else if (state.activeTab === 'add') content = renderAddTab();
+            else if (state.activeTab === 'list') content = renderListTab();
+            else content = renderSettingsTab();
+            let themeClass = state.theme === 'dark' ? 'dark-theme' : '';
+            let bgGradient = state.theme === 'dark' ? '' : 'bg-gradient-to-br from-gray-50 to-gray-100';
+            return `<div class="min-h-screen ${bgGradient} ${themeClass} pb-16"><div class="container mx-auto max-w-md">${content}</div><nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg shadow-2xl border-t border-gray-100 pb-safe ${state.theme === 'dark' ? 'dark-theme' : ''}"><div class="container mx-auto max-w-md"><div class="flex justify-around py-2">${[{ id: 'home', icon: '🏠', label: 'Ana Sayfa' }, { id: 'add', icon: '➕', label: 'Ekle' }, { id: 'list', icon: '📋', label: 'Listem' }, { id: 'settings', icon: '⚙️', label: 'Ayarlar' }].map(t => `<button onclick="window.switchTab('${t.id}')" class="flex flex-col items-center py-2 px-5 rounded-2xl transition-all ${state.activeTab === t.id ? 'text-blue-600 bg-blue-50' : 'text-gray-500'}"><div class="text-2xl">${t.icon}</div><span class="text-xs mt-1 font-medium">${t.label}</span></button>`).join('')}</div></div></nav></div>`;
+        };
+
+        const renderEditModal = () => {
+            if (!state.showEditModal || !state.editingWord) return '';
+            return `<div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeEditModal(event)"><div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-screen overflow-y-auto animate-scale-in" onclick="event.stopPropagation()"><div class="sticky top-0 bg-white border-b border-gray-100 p-5 rounded-t-2xl"><div class="flex justify-between items-center"><div class="flex items-center gap-2"><span class="text-2xl">✏️</span><h3 class="font-bold text-xl">Kelime Düzenle</h3></div><button onclick="window.closeEditModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button></div></div><div class="p-5 space-y-4"><input type="text" id="editTerm" value="${(state.editingWord.term || '').replace(/"/g, '&quot;')}" placeholder="Kelime" class="w-full px-4 py-3 border border-gray-200 rounded-xl"><input type="text" id="editDefinition" value="${(state.editingWord.definition || '').replace(/"/g, '&quot;')}" placeholder="Anlamı" class="w-full px-4 py-3 border border-gray-200 rounded-xl"><input type="text" id="editImage" value="${(state.editingWord.image || '').replace(/"/g, '&quot;')}" placeholder="Görsel URL" class="w-full px-4 py-3 border border-gray-200 rounded-xl"><textarea id="editSynonyms" rows="2" placeholder="Eş Anlamlılar" class="w-full px-4 py-3 border border-gray-200 rounded-xl">${state.editingWord.synonyms || ''}</textarea><input type="text" id="editAntonyms" value="${(state.editingWord.antonyms || '').replace(/"/g, '&quot;')}" placeholder="Zıt Anlamlılar" class="w-full px-4 py-3 border border-gray-200 rounded-xl"><textarea id="editExample" rows="2" placeholder="Örnek Cümle" class="w-full px-4 py-3 border border-gray-200 rounded-xl">${state.editingWord.exampleSentence || ''}</textarea></div><div class="sticky bottom-0 bg-white border-t border-gray-100 p-5 rounded-b-2xl flex gap-3"><button onclick="window.saveEdit()" class="flex-1 bg-gradient-to-r from-green-500 to-blue-600 text-white py-3 rounded-xl font-semibold">💾 Kaydet</button><button onclick="window.closeEditModal()" class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold">İptal</button></div></div></div>`;
+        };
+
+        const renderDetailModal = () => {
+            if (!state.showDetailModal || !state.detailWord) return '';
+            let word = state.detailWord, config = LEVEL_CONFIG[word.level];
+            return `<div class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4 modal-overlay animate-fade-in" onclick="window.closeDetailModal(event)"><div class="bg-white rounded-3xl shadow-2xl max-w-md w-full max-h-[90vh] overflow-y-auto animate-scale-in" onclick="event.stopPropagation()"><div class="sticky top-0 bg-white rounded-t-3xl p-5 border-b border-gray-100"><div class="flex justify-between items-start"><div class="flex-1"><div class="flex items-center gap-2 mb-2"><span class="text-3xl">${getLevelIcon(word.level)}</span><span class="px-3 py-1 rounded-full text-xs font-semibold text-white ${config.bg}">Seviye ${word.level} • ${config.name}</span></div><div class="flex items-center gap-2 mt-2"><h2 class="text-3xl font-bold text-gray-800">${word.term}</h2><button onclick="window.speakText('${word.term.replace(/'/g, "\\'")}', 'en')" class="speak-btn w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl">🔊</button></div></div><button onclick="window.closeDetailModal()" class="text-gray-400 hover:text-gray-600 text-2xl w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100">✕</button></div></div><div class="p-5 space-y-5">${state.cardFields.showImage && word.image ? `<div class="rounded-2xl overflow-hidden"><img src="${word.image}" class="w-full h-64 object-cover"></div>` : `<div class="rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 p-8 text-center"><span class="text-6xl">📖</span><p class="text-gray-500 mt-2">Görsel eklenmemiş</p></div>`}<div class="bg-gray-50 rounded-2xl p-5"><div class="flex items-center gap-2 mb-2"><span class="text-xl">📝</span><h3 class="font-semibold text-gray-700">Anlamı</h3></div><p class="text-gray-800 text-lg">${word.definition}</p></div>${state.cardFields.showSynonyms && word.synonyms ? `<div class="bg-green-50 rounded-2xl p-5"><div class="flex items-center gap-2 mb-2"><span class="text-xl">📖</span><h3 class="font-semibold text-green-700">Eş Anlamlılar</h3></div><p class="text-green-800">${word.synonyms}</p></div>` : ''}${state.cardFields.showAntonyms && word.antonyms ? `<div class="bg-red-50 rounded-2xl p-5"><div class="flex items-center gap-2 mb-2"><span class="text-xl">⚡</span><h3 class="font-semibold text-red-700">Zıt Anlamlılar</h3></div><p class="text-red-800">${word.antonyms}</p></div>` : ''}${state.cardFields.showExampleSentence && word.exampleSentence ? `<div class="bg-blue-50 rounded-2xl p-5"><div class="flex items-center gap-2 mb-2"><span class="text-xl">💬</span><h3 class="font-semibold text-blue-700">Örnek Cümle</h3></div><p class="text-blue-800 italic">"${word.exampleSentence}"</p><button onclick="window.speakText('${word.exampleSentence.replace(/'/g, "\\'")}', 'en')" class="mt-3 text-sm text-blue-600 flex items-center gap-1 hover:underline">🔊 Cümleyi dinle</button></div>` : ''}<div class="flex items-center justify-between pt-3 border-t border-gray-100"><div class="text-sm text-gray-500">${state.cardFields.showKademe ? `<div>Kademe: ${word.kademe}/${config.requiredStreak}</div>` : ''}${state.cardFields.showNextReview ? `<div>Sonraki tekrar: ${getNextReviewDate(word.nextReview)}</div>` : ''}</div><div class="flex gap-2"><button onclick="window.openEditModalFromDetail()" class="px-4 py-2 bg-blue-500 text-white rounded-xl text-sm font-semibold">✏️ Düzenle</button><button onclick="window.deleteWordFromDetail()" class="px-4 py-2 bg-red-500 text-white rounded-xl text-sm font-semibold">🗑️ Sil</button></div></div></div></div></div>`;
         };
 
         // Global functions
         window.startQuiz = startQuiz;
         window.finishQuiz = finishQuiz;
         window.handleMultipleChoiceAnswer = handleMultipleChoiceAnswer;
+        window.handleClozeAnswer = handleClozeAnswer;
         window.handleWritingAnswer = handleWritingAnswer;
-        window.switchTab = (tab) => { state.activeTab = tab; render(); };
-        window.toggleAddForm = (show) => { state.showAddForm = show; render(); };
+        window.switchTab = (t) => { state.activeTab = t; render(); };
+        window.toggleAddForm = (v) => { state.showAddForm = v; render(); };
         window.addWord = addWord;
         window.deleteWord = deleteWord;
-        window.openEditModal = (word) => { openEditModal(word); };
-        window.openDetailModal = (word) => { openDetailModal(word); };
-        window.closeDetailModal = (event) => { 
-            if (!event || event.target === event.currentTarget) {
-                state.showDetailModal = false;
-                state.detailWord = null;
-                render();
-            }
-        };
-        window.openEditModalFromDetail = () => {
-            if (state.detailWord) {
-                state.showDetailModal = false;
-                openEditModal(state.detailWord);
-            }
-        };
-        window.deleteWordFromDetail = () => {
-            if (state.detailWord) {
-                const id = state.detailWord.id;
-                state.showDetailModal = false;
-                deleteWord(id);
-            }
-        };
-        window.closeEditModal = (event) => { 
-            if (!event || event.target === event.currentTarget) {
-                state.showEditModal = false;
-                state.editingWord = null;
-                render();
-            }
-        };
+        window.openEditModal = openEditModal;
+        window.openDetailModal = openDetailModal;
+        window.closeDetailModal = (e) => { if (!e || e.target === e.currentTarget) { state.showDetailModal = false; state.detailWord = null; render(); } };
+        window.openEditModalFromDetail = () => { if (state.detailWord) { let w = state.detailWord; state.showDetailModal = false; openEditModal(w); } };
+        window.deleteWordFromDetail = () => { if (state.detailWord) { let id = state.detailWord.id; state.showDetailModal = false; deleteWord(id); } };
+        window.closeEditModal = (e) => { if (!e || e.target === e.currentTarget) { state.showEditModal = false; state.editingWord = null; render(); } };
         window.saveEdit = () => {
-            const termInput = document.getElementById('editTerm');
-            const defInput = document.getElementById('editDefinition');
-            const imageInput = document.getElementById('editImage');
-            const synonymsInput = document.getElementById('editSynonyms');
-            const antonymsInput = document.getElementById('editAntonyms');
-            const exampleInput = document.getElementById('editExample');
-            
+            let term = document.getElementById('editTerm')?.value;
+            let def = document.getElementById('editDefinition')?.value;
+            let img = document.getElementById('editImage')?.value;
+            let syn = document.getElementById('editSynonyms')?.value;
+            let ant = document.getElementById('editAntonyms')?.value;
+            let ex = document.getElementById('editExample')?.value;
             if (state.editingWord) {
-                state.editingWord.term = termInput?.value || '';
-                state.editingWord.definition = defInput?.value || '';
-                state.editingWord.image = imageInput?.value || '';
-                state.editingWord.synonyms = synonymsInput?.value || '';
-                state.editingWord.antonyms = antonymsInput?.value || '';
-                state.editingWord.exampleSentence = exampleInput?.value || '';
+                state.editingWord.term = term;
+                state.editingWord.definition = def;
+                state.editingWord.image = img;
+                state.editingWord.synonyms = syn;
+                state.editingWord.antonyms = ant;
+                state.editingWord.exampleSentence = ex;
                 updateWord();
             }
         };
         window.exportData = exportData;
         window.importData = (input) => importData({ target: input });
-        window.setTheme = (theme) => { 
-            state.theme = theme; 
-            saveToLocalStorage(); 
-            render();
-            if (theme === 'dark') {
-                document.body.classList.add('dark-theme');
-            } else {
-                document.body.classList.remove('dark-theme');
-            }
-        };
-        window.changeSortType = (type) => { state.sortType = type; render(); };
+        window.setTheme = (t) => { state.theme = t; saveToLocalStorage(); render(); if (t === 'dark') document.body.classList.add('dark-theme'); else document.body.classList.remove('dark-theme'); };
+        window.changeSortType = (t) => { state.sortType = t; render(); };
         window.speakText = speakText;
         window.toggleCardField = toggleCardField;
         window.resetCardFields = resetCardFields;
-        window.searchWords = (query) => { 
-            state.searchQuery = query; 
-            render(); 
-        };
-        window.clearSearch = () => { 
-            state.searchQuery = ''; 
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) searchInput.value = '';
-            render(); 
-        };
+        window.searchWords = (q) => { state.searchQuery = q; render(); };
+        window.clearSearch = () => { state.searchQuery = ''; let inp = document.getElementById('searchInput'); if (inp) inp.value = ''; render(); };
         window.saveQuizHours = () => {
-            const startHour = parseInt(document.getElementById('startHour')?.value);
-            const endHour = parseInt(document.getElementById('endHour')?.value);
-            if (!isNaN(startHour) && !isNaN(endHour) && startHour >= 0 && startHour <= 23 && endHour >= 0 && endHour <= 23) {
-                state.quizStartHour = startHour;
-                state.quizEndHour = endHour;
+            let sh = parseInt(document.getElementById('startHour')?.value);
+            let eh = parseInt(document.getElementById('endHour')?.value);
+            if (!isNaN(sh) && !isNaN(eh) && sh >= 0 && sh <= 23 && eh >= 0 && eh <= 23) {
+                state.quizStartHour = sh;
+                state.quizEndHour = eh;
                 saveToLocalStorage();
                 alert('Saat ayarları kaydedildi!');
                 render();
@@ -1810,42 +668,29 @@
                 alert('Lütfen geçerli saat girin (0-23)');
             }
         };
-        
-        // Sync input values
+
         window.syncInputs = () => {
-            const termInput = document.getElementById('newTerm');
-            const defInput = document.getElementById('newDefinition');
-            const imageInput = document.getElementById('newImage');
-            const synonymsInput = document.getElementById('newSynonyms');
-            const antonymsInput = document.getElementById('newAntonyms');
-            const exampleInput = document.getElementById('newExample');
-            
-            if (termInput) state.newWord.term = termInput.value;
-            if (defInput) state.newWord.definition = defInput.value;
-            if (imageInput) state.newWord.image = imageInput.value;
-            if (synonymsInput) state.newWord.synonyms = synonymsInput.value;
-            if (antonymsInput) state.newWord.antonyms = antonymsInput.value;
-            if (exampleInput) state.newWord.exampleSentence = exampleInput.value;
+            let t = document.getElementById('newTerm'), d = document.getElementById('newDefinition'), i = document.getElementById('newImage');
+            let s = document.getElementById('newSynonyms'), a = document.getElementById('newAntonyms'), e = document.getElementById('newExample');
+            if (t) state.newWord.term = t.value;
+            if (d) state.newWord.definition = d.value;
+            if (i) state.newWord.image = i.value;
+            if (s) state.newWord.synonyms = s.value;
+            if (a) state.newWord.antonyms = a.value;
+            if (e) state.newWord.exampleSentence = e.value;
         };
-        
-        window.syncWritingAnswer = () => {
-            const answerInput = document.getElementById('writingAnswer');
-            if (answerInput) state.writingAnswer = answerInput.value;
-        };
-        
+        window.syncWritingAnswer = () => { let a = document.getElementById('writingAnswer'); if (a) state.writingAnswer = a.value; };
         setInterval(() => {
             if (state.showAddForm) window.syncInputs();
             if (state.showQuiz && state.quizType === 'writing') window.syncWritingAnswer();
         }, 100);
-        
+
         const render = () => {
             document.getElementById('app').innerHTML = renderMain() + renderEditModal() + renderDetailModal();
         };
-        
+
         loadFromLocalStorage();
-        if (state.theme === 'dark') {
-            document.body.classList.add('dark-theme');
-        }
+        if (state.theme === 'dark') document.body.classList.add('dark-theme');
         render();
     </script>
 </body>
